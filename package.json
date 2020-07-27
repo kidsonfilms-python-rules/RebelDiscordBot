@@ -1,0 +1,11 @@
+{
+  "name": "pmsdiscordbot",
+  "version": "0.0.1",
+  "description": "This is a discord bot for Potato Master's Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Siddharth Ray",
+  "license": "MIT"
+}
