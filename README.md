@@ -15,7 +15,7 @@ This is a discord bot for Potato Master's Server. I know weird name.
 Download the current snapshot by either running the command
 
 ```sh
-git clone URL https://github.com/kidsonfilms-python-rules/PMSDiscordBot.git
+git clone https://github.com/kidsonfilms-python-rules/PMSDiscordBot.git
 ```
 or download the ZIP version [here](https://github.com/kidsonfilms-python-rules/PMSDiscordBot/archive/master.zip).
 
