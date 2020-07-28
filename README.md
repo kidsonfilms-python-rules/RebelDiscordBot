@@ -22,14 +22,24 @@ or download the ZIP version [here](https://github.com/kidsonfilms-python-rules/P
 <!-- After it finished downloading, go into the root folder and run  -->
 ```sh
 npm i
-npm run startup
 ```
 
 ## Usage
 
-To test your local bot, go to [Discord Developer Applications Portal](discord.com/developers/applications) and add a new application
 
-Then, go to the [Discord Permissions Calculator](https://discordapi.com/permissions.html) and select all the Permissions you want your bot to get. After that, click the link it provides you and select your server and click `Continue > Authorize`.
+### Test on local machine
+run the following command:
+```sh
+npm start
+```
+
+### Test on Heroku (Not Yet Working)
+
+To test your local bot, go to [Discord Developer Applications Portal](discord.com/developers/applications) and add a new application and fill it out. Go to Bot and add a username and icon (optional). Then copy your Client ID in `General Information`. __KEEP THIS ID SECRET FROM PEOPLE YOU DON'T KNOW.__
+
+Then, go to the [Discord Permissions Calculator](https://discordapi.com/permissions.html) and select all the Permissions you want your bot to get and paste your client ID into the corresponding box. After that, click the link it provides you and select your server and click `Continue > Authorize`.
+
+After that [Follow These Steps]() to deploy to Heroku
 ## Support
 
 Please [open an issue](https://github.com/kidsonfilms-python-rules/PMSDiscordBot/issues/new) for support.
