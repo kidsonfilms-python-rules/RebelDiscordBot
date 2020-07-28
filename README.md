@@ -19,7 +19,7 @@ git clone https://github.com/kidsonfilms-python-rules/PMSDiscordBot.git
 ```
 or download the ZIP version [here](https://github.com/kidsonfilms-python-rules/PMSDiscordBot/archive/master.zip).
 
-After it finished downloading, go into the root folder and run 
+<!-- After it finished downloading, go into the root folder and run  -->
 ```sh
 npm i
 npm run startup
