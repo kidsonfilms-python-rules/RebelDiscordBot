@@ -4,7 +4,8 @@
   "description": "This is a discord bot for Potato Master's Server",
   "main": "index.js",
   "scripts": {
-    "init": "node init.js"
+    "init": "node init.js",
+    "start": "START redis-server.exe && node ."
   },
   "author": "Siddharth Ray",
   "license": "MIT",

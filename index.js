@@ -98,4 +98,4 @@ client.on('message', async message => {
 
 
 //Lead Dev will give token
-client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.DriZX6zXwDE1eggPe2vm0SYDnNw')
+client.login('YOUR_TOKEN')
