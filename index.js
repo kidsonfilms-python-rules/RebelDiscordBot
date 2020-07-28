@@ -1,3 +1,11 @@
+// app = require('app')
+
+// let port = process.env.PORT;
+// if (port == null || port == "") {
+//   port = 8000;
+// }
+// app.listen(port);
+
 const Discord = require('discord.js')
 
 const animals = require('relevant-animals')
@@ -90,4 +98,4 @@ client.on('message', async message => {
 
 
 //Lead Dev will give token
-client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.db9LPGZR1qxL_6EAEZQRb63DjaQ')
+client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.DriZX6zXwDE1eggPe2vm0SYDnNw')
