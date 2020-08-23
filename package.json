@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init": "node init.js",
-    "run" : "START redis-server.exe && node ."
+    "start": "node ."
   },
   "author": "Siddharth Ray",
   "license": "MIT",

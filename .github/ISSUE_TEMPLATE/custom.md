@@ -7,11 +7,11 @@ assignees: ''
 
 ---
 
-What are you doing?
-<!-- Type how to recreate the error --!>
+# What are you doing?
+<!-- Type how to recreate the error -->
 
 # Conditions
 
-OS:
-Type (Browser or App):
-Channel (`#rules`, `#roles`):
+- OS (`macOS`, `Android`):
+- Type (`Browser` or `App`):
+- Channel (`#rules`, `#roles`):

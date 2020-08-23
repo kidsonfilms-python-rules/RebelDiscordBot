@@ -15,17 +15,17 @@ const scorerank = require('scorerank')
 const url = 'redis://127.0.0.1:6379'
 const options = { prefix: 'scores' }
 
-const redis = require("redis");
-const redisClient = redis.createClient();
+// const redis = require("redis");
+// const redisClient = redis.createClient();
 
-redisClient.on("error", function (error) {
-    console.error(error);
-});
+// redisClient.on("error", function (error) {
+//     console.error(error);
+// });
 
-redisClient.set("key", "value", redis.print);
-redisClient.get("key", redis.print);
+// redisClient.set("key", "value", redis.print);
+// redisClient.get("key", redis.print);
 
-const score = scorerank(url, options)
+// const score = scorerank(url, options)
 
 //the var client is basically the bot
 const client = new Discord.Client()
@@ -55,47 +55,54 @@ client.on('message', async message => {
     } else if (command === prefix + 'ping') {
         message.channel.send('pong!')
     } else if (command === prefix + 'animals') {
+        var anilist = ["dog", 'cat']
+        if (anilist[Math.floor(Math.random() * anilist.length)] == 'dog') {
         animals.dog().then(s => message.channel.send("Here you go :smiley:", { files: [s] }))
-    } else if (command === prefix + 'cube-record') {
-        var dict = {
-            1: "1st",
-            2: "2nd",
-            3: "3rd",
-            4: "4th",
-            5: "5th",
-            6: "6th",
-            7: "7th",
-            8: "8th",
-            9: "9th",
-            10: "10th"
-        };
-        // message.channel.send('I cant set rubix cube records yet :weary:')
-        console.log(command)
-        if (commandList[1] === "set") {
-            console.log("contains set")
-            const sender = message.author.username
-            const time = commandList[2]
-            console.log(sender)
-            score.add(sender, time*-1)
-        } else if (commandList[1] === "display") {
-            const tops = await score.top([0, 10])
-            console.log(tops)
-            var rankMessage = ''
-            var indexRank = 1
-            tops.forEach(rank => {
-                rankNum = dict[indexRank]
-                time = rank[1].toString().replace('-', '')
-                rankMessage += rankNum + ".  " + rank[0] + ' with the time of ' + time + '\n'
-                indexRank = indexRank + 1
-            })
-            console.log(rankMessage)
-            message.channel.send(rankMessage)
-        }
+        } else if (anilist[Math.floor(Math.random() * anilist.length)] == 'cat') {
+            animals.shibe().then(s => message.channel.send("Here you go :smiley:", { files: [s] }))
+            }
+        animals.shibe().then(s => console.log(s))
+        message.delete();
+    } //else if (command === prefix + 'cube-record') {
+    //     var dict = {
+    //         1: "1st",
+    //         2: "2nd",
+    //         3: "3rd",
+    //         4: "4th",
+    //         5: "5th",
+    //         6: "6th",
+    //         7: "7th",
+    //         8: "8th",
+    //         9: "9th",
+    //         10: "10th"
+    //     };
+    //     // message.channel.send('I cant set rubix cube records yet :weary:')
+    //     console.log(command)
+    //     if (commandList[1] === "set") {
+    //         console.log("contains set")
+    //         const sender = message.author.username
+    //         const time = commandList[2]
+    //         console.log(sender)
+    //         score.add(sender, time*-1)
+    //     } else if (commandList[1] === "display") {
+    //         const tops = await score.top([0, 10])
+    //         console.log(tops)
+    //         var rankMessage = ''
+    //         var indexRank = 1
+    //         tops.forEach(rank => {
+    //             rankNum = dict[indexRank]
+    //             time = rank[1].toString().replace('-', '')
+    //             rankMessage += rankNum + ".  " + rank[0] + ' with the time of ' + time + '\n'
+    //             indexRank = indexRank + 1
+    //         })
+    //         console.log(rankMessage)
+    //         message.channel.send(rankMessage)
+    //     }
 
-    }
+    //}
 
 })
 
 
 //Lead Dev will give token
-client.login('YOUR_TOKEN')
+client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.iDl45309__ItXLAkY5egzI2bktA')
