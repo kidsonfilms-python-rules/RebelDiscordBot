@@ -15,6 +15,8 @@ const scorerank = require('scorerank')
 const url = 'redis://127.0.0.1:6379'
 const options = { prefix: 'scores' }
 
+let https = require('https')
+
 // const redis = require("redis");
 // const redisClient = redis.createClient();
 
@@ -51,19 +53,35 @@ client.on('message', async message => {
     const command = commandList[0]
 
     if (command === prefix + 'help') {
-        message.channel.send('Here are all the commands: \n-ping  -- tests if the bot is online \n-animals  -- returns a random cute animal\n-cube-record  -- records a cube time record')
+        message.channel.send('Here are all the commands: \n-ping  -- tests if the bot is online \n-animals  -- returns a random cute animal\n-meme  -- returns a meme')
     } else if (command === prefix + 'ping') {
         message.channel.send('pong!')
     } else if (command === prefix + 'animals') {
         var anilist = ["dog", 'cat']
         if (anilist[Math.floor(Math.random() * anilist.length)] == 'dog') {
-        animals.dog().then(s => message.channel.send("Here you go :smiley:", { files: [s] }))
+            animals.dog().then(s => message.channel.send("Here you go :smiley:", { files: [s] }))
         } else if (anilist[Math.floor(Math.random() * anilist.length)] == 'cat') {
             animals.shibe().then(s => message.channel.send("Here you go :smiley:", { files: [s] }))
-            }
+        }
         animals.shibe().then(s => console.log(s))
         message.delete();
-    } //else if (command === prefix + 'cube-record') {
+    } else if (command === prefix + 'meme') {
+        // https.get("https://meme-api.herokuapp.com/gimme", (s) => {
+        //     console.log(s)
+        // })
+        const request = require('request');
+
+        request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+            if (err) { return console.log(err); }
+            console.log(body.url + "has been sent to " + message.author);
+            message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
+        });
+        message.delete()
+    }
+
+
+
+    //else if (command === prefix + 'cube-record') {
     //     var dict = {
     //         1: "1st",
     //         2: "2nd",
