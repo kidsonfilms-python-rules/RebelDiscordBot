@@ -123,4 +123,4 @@ client.on('message', async message => {
 
 
 //Lead Dev will give token
-client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.iDl45309__ItXLAkY5egzI2bktA')
+client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.rUS7vKhWlLm5IMMM--sD1Rxnnq0')
