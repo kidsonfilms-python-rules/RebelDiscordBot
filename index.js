@@ -10,7 +10,11 @@ const Discord = require('discord.js')
 
 const animals = require('relevant-animals')
 
+var schedule = require('node-schedule');
+
 const scorerank = require('scorerank')
+
+var textract = require('textract');
 
 const url = 'redis://127.0.0.1:6379'
 const options = { prefix: 'scores' }
@@ -32,6 +36,8 @@ let https = require('https')
 //the var client is basically the bot
 const client = new Discord.Client()
 
+
+
 // tells the bot what to look for to figure out, thats a command is coming
 const prefix = '-'
 
@@ -39,9 +45,22 @@ client.once('ready', () => {
     console.log('Im online yay!')
 })
 
+
 client.on('message', async message => {
+    //MODERATION
+    var Filter = require('bad-words'),
+    filter = new Filter({ placeHolder: '򯾁'});
+
+    // console.log(filter.clean(message.content));
+    if (filter.clean(message.content).includes('򯾁')) {
+        message.delete()
+        const mutedEmbed = new Discord.MessageEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for saying ```" + message.content + "``` If you think this is a mistake, contact an @Admin")
+        message.author.send(mutedEmbed)
+        message.channel.send(message.author.toString() + "** has broken Rebel Retreat's Rules by Saying Blacklisted Words**")
+    }
+    
     //checks if it starts with '!' or the bot sent it. if not then returns the function
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.includes(prefix) || message.author.bot) return;
 
     //getting the args from the message
     const args = message.content.slice(message.length).split(/ +/)
@@ -53,7 +72,36 @@ client.on('message', async message => {
     const command = commandList[0]
 
     if (command === prefix + 'help') {
-        message.channel.send('Here are all the commands: \n-ping  -- tests if the bot is online \n-animals  -- returns a random cute animal\n-meme  -- returns a meme')
+        if (commandList[1] == 'admin') {      //message.sender.roles.find(r => r.name === "Admin") || message.member.roles.find(r => rname === "Mod"
+            var adminhelpembed = new Discord.MessageEmbed()
+                .setColor('#E96A00')
+                .setTitle('Commands List')
+                .addFields(
+                    { name: '‎', value: '‎' },
+                    { name: '**-ping**', value: 'Gives the ping.' },
+
+                )
+                .setFooter('rebel bot • Admin Help Menu')
+            message.channel.send(adminhelpembed)
+        } else {
+
+            var helpembed = new Discord.MessageEmbed()
+                .setColor('#E96A00')
+                .setTitle('Commands List')
+                .setDescription('**If you want Admin Help, do `-help admin`**')
+                .addFields(
+                    { name: '‎', value: '‎' },
+                    { name: '**-help**', value: 'Shows a list of all the commands.' },
+                    { name: '**-animals**', value: 'Gives a random cute animal picture! :smiley:' },
+                    { name: '**-meme**', value: 'Returns a meme from Reddit' },
+
+                )
+                .setFooter('rebel bot • Help Menu')
+            message.channel.send(helpembed)
+        }
+        // message.channel.send(helpembed)
+        message.delete()
+
     } else if (command === prefix + 'ping') {
         message.channel.send('pong!')
     } else if (command === prefix + 'animals') {
@@ -73,12 +121,49 @@ client.on('message', async message => {
 
         request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
             if (err) { return console.log(err); }
-            console.log(body.url + "has been sent to " + message.author);
-            message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
+            textract.fromUrl(body.url, function (error, text) {
+                console.log(body.url + '   ' + text)
+            })
+
+            if (body.nsfw == true) {
+                console.log(body.url + "has been sent to " + message.author);
+                message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
+            } else {
+                request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+                    if (err) { return console.log(err); }
+                    if (body.nsfw == false) {
+                        console.log(body.url + "has been sent to " + message.author);
+                        message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
+                    } else {
+                        request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+                            if (err) { return console.log(err); }
+                            if (body.nsfw == false) {
+                                console.log(body.url + "has been sent to " + message.author);
+                                message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
+                            } else {
+                                const errorEmbed = new Discord.MessageEmbed()
+                                    .setColor('#FF0000')
+                                    .setTitle('ERROR 376  TEST')
+                                    .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
+                                    .setDescription('An Error Has Occurred. Please Try Agian')
+                                    .setThumbnail('https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
+                                    .setTimestamp()
+                                    .setFooter('Error TEST', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
+
+                                message.channel.send(errorEmbed);
+                            }
+                        });
+                    }
+                });
+            }
         });
         message.delete()
     }
 
+
+
+
+    
 
 
     //else if (command === prefix + 'cube-record') {
@@ -120,6 +205,59 @@ client.on('message', async message => {
     //}
 
 })
+
+client.on('guildMemberAdd', m => {
+    console.log(m.username + " Just Joined!")
+    m.send("Welcome to the Rebel Retreat new recruit! You are currently a foreigner and must read the rules (in the #server-rules channel) for this channel to have access to read and send messages to this server. Go to the #self-roles channel to assign yourself roles that suit your tastes. Further roles will be assigned by admins or moderators. Help and support will be given in its respective channel, #help-and-support. Have fun!")
+})
+
+//MEME SCHEDULE
+var scheduledMeme = schedule.scheduleJob('* 12 * * *', function(){
+     // https.get("https://meme-api.herokuapp.com/gimme", (s) => {
+        //     console.log(s)
+        // })
+        const request = require('request');
+        const memeChannel = client.channels.cache.find(channel => channel.name === "dank-memes")
+
+        request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+            if (err) { return console.log(err); }
+            textract.fromUrl(body.url, function (error, text) {
+                console.log(body.url + '   ' + text)
+            })
+
+            if (body.nsfw == true) {
+                console.log(body.url + " Is today's daily meme");
+                memeChannel.send("Here's today's daily meme directly from r/" + body.subreddit.toString() + " (" + body.postLink + ") Enjoy!", { files: [body.url] })
+            } else {
+                request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+                    if (err) { return console.log(err); }
+                    if (body.nsfw == false) {
+                        console.log(body.url + " Is today's daily meme");
+                        memeChannel.send("Here's today's daily meme directly from r/" + body.subreddit.toString() + " (" + body.postLink + ") Enjoy!", { files: [body.url] })
+                    } else {
+                        request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+                            if (err) { return console.log(err); }
+                            if (body.nsfw == false) {
+                                console.log(body.url + " Is today's daily meme");
+                                memeChannel.send("Here's today's daily meme directly from r/" + body.subreddit.toString() + " (" + body.postLink + ") Enjoy!", { files: [body.url] })
+                            } else {
+                                const errorEmbed = new Discord.MessageEmbed()
+                                    .setColor('#FF0000')
+                                    .setTitle('ERROR 376  TEST')
+                                    .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
+                                    .setDescription('An Error Has Occurred. Please Try Agian')
+                                    .setThumbnail('https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
+                                    .setTimestamp()
+                                    .setFooter('Error TEST', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
+
+                                memeChannel.send(errorEmbed);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+  });
 
 
 //Lead Dev will give token
