@@ -127,7 +127,7 @@ client.on('message', async message => {
 
             if (body.nsfw == true) {
                 console.log(body.url + "has been sent to " + message.author);
-                message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
+                message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + " (" + body.postLink + ")", { files: [body.url] })
             } else {
                 request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
                     if (err) { return console.log(err); }
@@ -212,7 +212,7 @@ client.on('guildMemberAdd', m => {
 })
 
 //MEME SCHEDULE
-var scheduledMeme = schedule.scheduleJob('* 12 * * *', function(){
+var scheduledMeme = schedule.scheduleJob('00 19 * * *', function(){
      // https.get("https://meme-api.herokuapp.com/gimme", (s) => {
         //     console.log(s)
         // })
