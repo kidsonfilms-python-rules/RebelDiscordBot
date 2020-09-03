@@ -262,13 +262,9 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function(){
 
 //Lead Dev will give token
 <<<<<<< HEAD
-<<<<<<< HEAD
 client.login('')
 
 //52472962
 =======
 client.login('token')
 >>>>>>> parent of bb3fc15... Fixed Token Error
-=======
-client.login('')
->>>>>>> parent of 3b8a8d9... Website Bug Fixes
