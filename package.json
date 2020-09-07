@@ -23,7 +23,7 @@
   },
   "devDependencies": {},
   "engines": {
-    "node": "10.x"
+    "node": "12.x"
   },
   "repository": {
     "type": "git",
