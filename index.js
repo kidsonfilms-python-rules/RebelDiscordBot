@@ -20,6 +20,7 @@ const url = 'redis://127.0.0.1:6379'
 const options = { prefix: 'scores' }
 
 let https = require('https')
+let Tesseract = require('tesseract.js')
 
 // const redis = require("redis");
 // const redisClient = redis.createClient();
@@ -112,7 +113,8 @@ client.on('message', async message => {
         message.delete()
 
     } else if (command === prefix + 'ping') {
-        message.channel.send('pong!')
+        const m = await message.channel.send("Ping? (wow you see this)");
+        m.edit(`Pong! \`${m.createdTimestamp - message.createdTimestamp}ms\``);
     } else if (command === prefix + 'animals') {
         var anilist = ["dog", 'cat']
         if (anilist[Math.floor(Math.random() * anilist.length)] == 'dog') {
@@ -129,9 +131,18 @@ client.on('message', async message => {
         const request = require('request');
 
         request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+            var isNSFW = false
+            var Filter = require('bad-words'),
+                filter = new Filter({ placeHolder: '򯾁' });
             if (err) { return console.log(err); }
-            textract.fromUrl(body.url, function (error, text) {
-                console.log(body.url + '   ' + text)
+            Tesseract.recognize(
+                body.url,
+                'eng',
+                { logger: m => console.log(m) }
+            ).then(({ data: { text } }) => {
+                if (filter.clean(text).includes('򯾁')) {
+
+                }
             })
 
             if (body.nsfw == true) {
@@ -139,12 +150,16 @@ client.on('message', async message => {
                 message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + " (" + body.postLink + ")", { files: [body.url] })
             } else {
                 request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+                    var Filter = require('bad-words'),
+                        filter = new Filter({ placeHolder: '򯾁' });
                     if (err) { return console.log(err); }
                     if (body.nsfw == false) {
                         console.log(body.url + "has been sent to " + message.author);
                         message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
                     } else {
                         request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+                            var Filter = require('bad-words'),
+                                filter = new Filter({ placeHolder: '򯾁' });
                             if (err) { return console.log(err); }
                             if (body.nsfw == false) {
                                 console.log(body.url + "has been sent to " + message.author);
@@ -225,7 +240,58 @@ client.on('message', async message => {
             message.reply('Ticket has failed to close. Please make sure you have proper permissions or have no typos. Here is your failed command: ```sh\n' + message.content.toString() + '\n```')
             message.delete()
         }
-    } 
+    } else if (command == prefix + 'devcheck') {
+
+        Tesseract.recognize(
+            'https://cdn.discordapp.com/attachments/737406253696811058/752654332272443392/4a6jwypljql51.jpg',
+            'eng',
+            { logger: m => console.log(m) }
+        ).then(({ data: { text } }) => {
+            message.channel.send(text)
+        })
+    } else if (command == prefix + 'mute') {
+        if (!message.member.hasPermission("KICK_MEMBERS")) {
+            return message.channel.send("Nope.")
+        }
+
+        let member = message.mentions.members.first();
+        if (!member) return message.channel.send("That user doesn't exist!");
+        if (!member.kickable) return message.channel.send("I can't mute that user :(");
+
+        let reason = args.slice(1).join(" ")
+        if (!reason) {
+            reason = "No reason given.";
+        }
+        let muterole = guild.roles.find(r => r.name == "Muted" || r.name == "muted");
+
+        await member
+            .roles.add(muterole)
+            .catch(error =>
+                message.channel.send(`Unable to mute user because of: ${error}.`)
+            )
+        message.channel.send(`Successfully muted ${member.user.tag}!`);
+        member.send(new DiscordEmbed().setTitle(`You are muted in ${message.guild.name}`).setDescription(`We are sorry to inform you, that **you are muted in ${message.guild.name} untill furter notice.** If you think if was malicious/unfair or a mistake, please contact ` + '`kidsonfilms#4635`, `xapd421#2089`, or `potato master#2162.\n This is the given reason:\n```\n' + reason + '\n```\n'))
+
+    } else if (command == prefix + 'ban') {
+        if (!message.member.hasPermission("BAN_MEMBERS"))
+            return message.channel.send("nah fam");
+
+        let member = message.mentions.members.first();
+        if (!member) return message.channel.send("That user doesn't exist!");
+        if (!member.bannable)
+            return message.channel.send("I can't ban that user :(");
+
+        let reason = args.slice(1).join(" ");
+        if (!reason) reason = "No reason given.";
+
+        await member
+            .ban(reason) //Here we ban the user.
+            .catch(error => //We check if there is an error. If there is an error, it will display it in the chat.
+                message.channel.send(`Unable to ban user because of: ${error}.`)
+            );
+        message.channel.send(`Banned ${member.user.tag}!`); //If there is no error, and the user was banned, we let them know they were banned successfuly.
+        member.send(new DiscordEmbed().setTitle(`You are banned from ${message.guild.name}`).setDescription(`We are sorry to inform you, that **you are banned from ${message.guild.name} untill furter notice.** If you think if was malicious/unfair or a mistake, please contact ` + '`kidsonfilms#4635`, `xapd421#2089`, or `potato master#2162.\n This is the given reason:\n```\n' + reason + '\n```\n Thank you for being a rebel (as long as it lasted)'))
+    }
 
 
 
