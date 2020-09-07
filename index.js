@@ -327,7 +327,7 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
 
 
 //Lead Dev will give token
-client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.gLYR3VPF5hgqMW5NSTTE5UFHhrg')
+client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A._FlG0Te9M4jQEoiyUDOI3ms-MPU')
 
 //52472962
 
