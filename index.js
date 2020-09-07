@@ -43,6 +43,7 @@ const prefix = '-'
 
 client.once('ready', () => {
     console.log('Im online yay!')
+    client.user.setActivity("-help | rebel bot");
 })
 
 
@@ -59,7 +60,7 @@ client.on('message', async message => {
     // console.log(filter.clean(message.content));
     if (filter.clean(message.content).includes('򯾁')) {
         message.delete()
-        const mutedEmbed = new Discord.RichEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for saying ```" + message.content + "``` If you think this is a mistake, contact an @Admin")
+        const mutedEmbed = new Discord.MessageEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for saying ```" + message.content + "``` If you think this is a mistake, contact an @Admin")
         message.author.send(mutedEmbed)
         message.channel.send(message.author.toString() + "** has broken Rebel Retreat's Rules by Saying Blacklisted Words**")
     }
@@ -78,7 +79,7 @@ client.on('message', async message => {
 
     if (command === prefix + 'help') {
         if (commandList[1] == 'admin') {      //message.sender.roles.find(r => r.name === "Admin") || message.member.roles.find(r => rname === "Mod"
-            var adminhelpembed = new Discord.RichEmbed()
+            var adminhelpembed = new Discord.MessageEmbed()
                 .setColor('#E96A00')
                 .setTitle('Commands List')
                 .addFields(
@@ -91,7 +92,7 @@ client.on('message', async message => {
             message.channel.send(adminhelpembed)
         } else {
 
-            var helpembed = new Discord.RichEmbed()
+            var helpembed = new Discord.MessageEmbed()
                 .setColor('#E96A00')
                 .setTitle('Commands List')
                 .setDescription('**If you want Admin Help, do `-help admin`**')
@@ -149,7 +150,7 @@ client.on('message', async message => {
                                 console.log(body.url + "has been sent to " + message.author);
                                 message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
                             } else {
-                                const errorEmbed = new Discord.RichEmbed()
+                                const errorEmbed = new Discord.MessageEmbed()
                                     .setColor('#FF0000')
                                     .setTitle('ERROR 376  TEST')
                                     .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
@@ -224,7 +225,7 @@ client.on('message', async message => {
             message.reply('Ticket has failed to close. Please make sure you have proper permissions or have no typos. Here is your failed command: ```sh\n' + message.content.toString() + '\n```')
             message.delete()
         }
-    }
+    } 
 
 
 
