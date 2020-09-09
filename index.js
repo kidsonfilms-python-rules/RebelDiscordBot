@@ -49,6 +49,9 @@ client.once('ready', () => {
 
 
 client.on('message', async message => {
+
+    if (message.author.bot || message.webhookID) return;
+
     //MODERATION
     var Filter = require('bad-words'),
         filter = new Filter({ placeHolder: '򯾁' });
@@ -56,6 +59,78 @@ client.on('message', async message => {
     //EASTER EGG
     if (message.content.toString().toLowerCase().includes('suck')) {
         message.reply('no u')
+    }
+
+    //HONK FEATURE
+    if (message.content.toString().toLowerCase() == 'honk') {
+        const honkChannel = client.channels.cache.find(channel => channel.name === "honk")
+        var webhooks = message.guild.fetchWebhooks().then(w => {
+            // var myWebhooks = webhooks.filter(webhook => webhook.name === 'honkers');
+            // if (webhooks.size == 0) {
+            //     honkChannel.createWebhook('honkers', {
+            //         avatar: 'https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024',
+            //     }).then(webhook => {
+            //         console.log(`Created webhook ${webhook}`)
+            //         var webhooks = message.guild.fetchWebhooks().then(webhooks => {
+            //             // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
+            //             new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk')
+            //         });
+            //     }
+            //     ).catch(console.error);
+            // } else if (myWebhooks.size == 1) {
+                var webhooks = message.guild.fetchWebhooks().then(w => {
+                    // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
+                    // myWebhooks.first().send('honk')
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                });
+            // } else if (myWebhooks.size > 1) {
+            //     message.channel.send("**There are more than one `honkers` webhooks. Delete the extras.**")
+            // }
+        });
+
+    }
+    if (message.content.toString().toLowerCase() == 'honkblast') {
+        const honkChannel = client.channels.cache.find(channel => channel.name === "honk")
+        var webhooks = message.guild.fetchWebhooks().then(w => {
+            // var myWebhooks = webhooks.filter(webhook => webhook.name === 'honkers');
+            // if (webhooks.size == 0) {
+            //     honkChannel.createWebhook('honkers', {
+            //         avatar: 'https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024',
+            //     }).then(webhook => {
+            //         console.log(`Created webhook ${webhook}`)
+            //         var webhooks = message.guild.fetchWebhooks().then(webhooks => {
+            //             // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
+            //             new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk')
+            //         });
+            //     }
+            //     ).catch(console.error);
+            // } else if (myWebhooks.size == 1) {
+                var webhooks = message.guild.fetchWebhooks().then(w => {
+                    // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
+                    // myWebhooks.first().send('honk')
+                    
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
+                });
+            // } else if (myWebhooks.size > 1) {
+            //     message.channel.send("**There are more than one `honkers` webhooks. Delete the extras.**")
+            // }
+        });
+
+    }
+
+    if (message.channel.name.toString() == "honk") {
+        if(!message.content.toString().toLowerCase().includes('honk')) {
+            message.delete()
+        }
     }
 
     // console.log(filter.clean(message.content));
@@ -67,7 +142,7 @@ client.on('message', async message => {
     }
 
     //checks if it starts with '!' or the bot sent it. if not then returns the function
-    if (!message.content.includes(prefix) || message.author.bot) return;
+    if (!message.content.includes(prefix)) return;
 
     //getting the args from the message
     const args = message.content.slice(message.length).split(/ +/)
@@ -131,18 +206,9 @@ client.on('message', async message => {
         const request = require('request');
 
         request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-            var isNSFW = false
-            var Filter = require('bad-words'),
-                filter = new Filter({ placeHolder: '򯾁' });
             if (err) { return console.log(err); }
-            Tesseract.recognize(
-                body.url,
-                'eng',
-                { logger: m => console.log(m) }
-            ).then(({ data: { text } }) => {
-                if (filter.clean(text).includes('򯾁')) {
-
-                }
+            textract.fromUrl(body.url, function (error, text) {
+                console.log(body.url + '   ' + text)
             })
 
             if (body.nsfw == true) {
@@ -150,29 +216,25 @@ client.on('message', async message => {
                 message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + " (" + body.postLink + ")", { files: [body.url] })
             } else {
                 request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-                    var Filter = require('bad-words'),
-                        filter = new Filter({ placeHolder: '򯾁' });
                     if (err) { return console.log(err); }
                     if (body.nsfw == false) {
                         console.log(body.url + "has been sent to " + message.author);
                         message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
                     } else {
                         request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-                            var Filter = require('bad-words'),
-                                filter = new Filter({ placeHolder: '򯾁' });
                             if (err) { return console.log(err); }
                             if (body.nsfw == false) {
                                 console.log(body.url + "has been sent to " + message.author);
                                 message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
                             } else {
-                                const errorEmbed = new Discord.MessageEmbed()
+                                const errorEmbed = new Discord.RichEmbed()
                                     .setColor('#FF0000')
-                                    .setTitle('ERROR 376  TEST')
+                                    .setTitle('ERROR 376')
                                     .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
                                     .setDescription('An Error Has Occurred. Please Try Agian')
                                     .setThumbnail('https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
                                     .setTimestamp()
-                                    .setFooter('Error TEST', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
+                                    .setFooter('Error', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
 
                                 message.channel.send(errorEmbed);
                             }
@@ -341,7 +403,7 @@ client.on('message', async message => {
 
 client.on('guildMemberAdd', m => {
     console.log(m.username + " Just Joined!")
-    m.send("Welcome to the Rebel Retreat new recruit! You are currently a foreigner and must read the rules (in the #server-rules channel) for this channel to have access to read and send messages to this server. Go to the #self-roles channel to assign yourself roles that suit your tastes. Further roles will be assigned by admins or moderators. Help and support will be given in its respective channel, #help-and-support. Have fun!")
+    m.send("Welcome to the Rebel Retreat new recruit! You are currently a foreigner and must read the rules (in the `#server-rules` channel) for this channel to have access to read and send messages to this server. Go to the `#self-roles` channel to assign yourself roles that suit your tastes. Further roles will be assigned by admins or moderators. Help and support will be given in its respective channel, `#help-and-support`. Have fun!")
 })
 
 //MEME SCHEDULE
