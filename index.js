@@ -22,6 +22,8 @@ const options = { prefix: 'scores' }
 let https = require('https')
 let Tesseract = require('tesseract.js')
 
+var getMetadata = require('get-metadata')
+
 // const redis = require("redis");
 // const redisClient = redis.createClient();
 
@@ -61,6 +63,8 @@ client.on('message', async message => {
         message.reply('no u')
     }
 
+
+
     //HONK FEATURE
     if (message.content.toString().toLowerCase() == 'honk') {
         const honkChannel = client.channels.cache.find(channel => channel.name === "honk")
@@ -78,11 +82,11 @@ client.on('message', async message => {
             //     }
             //     ).catch(console.error);
             // } else if (myWebhooks.size == 1) {
-                var webhooks = message.guild.fetchWebhooks().then(w => {
-                    // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
-                    // myWebhooks.first().send('honk')
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                });
+            var webhooks = message.guild.fetchWebhooks().then(w => {
+                // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
+                // myWebhooks.first().send('honk')
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+            });
             // } else if (myWebhooks.size > 1) {
             //     message.channel.send("**There are more than one `honkers` webhooks. Delete the extras.**")
             // }
@@ -105,21 +109,21 @@ client.on('message', async message => {
             //     }
             //     ).catch(console.error);
             // } else if (myWebhooks.size == 1) {
-                var webhooks = message.guild.fetchWebhooks().then(w => {
-                    // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
-                    // myWebhooks.first().send('honk')
-                    
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                    new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', {avatarURL : "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024"})
-                });
+            var webhooks = message.guild.fetchWebhooks().then(w => {
+                // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
+                // myWebhooks.first().send('honk')
+
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+            });
             // } else if (myWebhooks.size > 1) {
             //     message.channel.send("**There are more than one `honkers` webhooks. Delete the extras.**")
             // }
@@ -128,7 +132,7 @@ client.on('message', async message => {
     }
 
     if (message.channel.name.toString() == "honk") {
-        if(!message.content.toString().toLowerCase().includes('honk')) {
+        if (!message.content.toString().toLowerCase().includes('honk')) {
             message.delete()
         }
     }
@@ -255,18 +259,15 @@ client.on('message', async message => {
         }).then(() => {
             const role = message.guild.roles.cache.find(role => role.name === name);
             message.member.roles.add(role);
-            var ticketChannel = message.guild.channels.create(name, 'text', [{
-                type: 'role',
-                id: message.guild.roles.cache.find(role => role.name === '@everyone').id,
-                deny: ['VIEW_CHANNEL']
-            }, {
-                type: 'role',
-                id: role,
-                allow: ['SEND_MESSAGES', "READ_MESSAGES"]
-
-            }]
-            ).then((c) => {
-                var ticketChannel = client.channels.cache.find(channel => channel.name === name)
+            var ticketChannel = message.guild.channels.create(name, 'text').then((c) => {
+                ticketChannel = client.channels.cache.find(channel => channel.name === name)
+                ticketChannel.overwritePermissions(message.guild.roles.cache.find('name', '@everyone'), {
+                    'VIEW_CHANNEL': false
+                })
+                ticketChannel.overwritePermissions(message.guild.cache.roles.find('name', 'Moderator'), {
+                    'VIEW_CHANNEL': true
+                })
+                ticketChannel.overwritePermissions(message.author.id, { 'VIEW_CHANNEL': true, 'SEND_MESSAGES': true, 'MENTION_EVERYONE': false })
                 var adminRoleId = message.guild.roles.cache.find(role => role.name === "Admin");
                 var modRoleId = message.guild.roles.cache.find(role => role.name === "Moderator");
                 var vipRoleId = message.guild.roles.cache.find(role => role.name === "VIPs");
@@ -456,7 +457,7 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
 
 
 //Lead Dev will give token
-client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A._FlG0Te9M4jQEoiyUDOI3ms-MPU')
+client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.oyPqHUKunPk2eLwlTIOTtWTlZfM')
 
 //52472962
 

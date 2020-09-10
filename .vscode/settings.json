@@ -5,5 +5,9 @@
         "editorGutter.addedBackground": "#0000",
         "editorGutter.deletedBackground": "#0000",
         "editorGutter.modifiedBackground": "#0000",
-       }
+    },
+    "cSpell.ignoreWords": [
+        "botlabs",
+        "rebelbot"
+    ]
 }
