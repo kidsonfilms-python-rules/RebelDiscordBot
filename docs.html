@@ -1,35 +1,38 @@
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/now-ui-kit.css">
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
-        <title>Rebel Retreat Documentation</title>
-        <meta content="Rebel Retreat Documentation" property="og:title">
-        <meta content="Documentation is not yet complete" property="og:description">
-        <meta content="https://kidsonfilms-python-rules.github.io/RebelDiscordBot/docs.html" property="og:url">
-        <meta content="https://kidsonfilms-python-rules.github.io/RebelDiscordBot/assets/BotLogo.png" property="og:image">
-        <meta content="#43B581" data-react-helmet="true" name="theme-color">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/docs.css">
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <link rel="stylesheet" href="./css/now-ui-kit.css">
+    <link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/default.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <title>Rebel Retreat Documention</title>
+</head>
+
 <body>
+
     <nav class="navbar navbar-expand-lg" id="navbar">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="assets/menuIcon.svg" width="20px" height="20px" style="max-width: none;">
+            <img src="./assets/menuIcon.svg" width="20px" height="20px" style="max-width: none !important;">
         </button>
-        <a href="#"><img src="assets/BotLogo.png"
+        <a href="#"><img src="./assets/BotLogo.png"
                 style="width:50px;height:50px;object-fit:cover;border-radius:50%;"></a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px; ">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 20px !important; ">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html#features">Features</a>
+                    <a class="nav-link" href="./#features">Features</a>
                 </li>
                 <li class="nav-item">
                     <!-- <a class="nav-link" href="/features">Documentation</a> -->
@@ -47,7 +50,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rebelplus.html">Rebel+</a>
+                    <a class="nav-link" href="/features">Rebel+</a>
                 </li>
             </ul>
             <!-- <div class="nav-item dropdown">
@@ -61,24 +64,155 @@
                 <a class="dropdown-item" href="/server-settings">Server settings</a>
             </div>
         </div> -->
-            <!-- <div class="nav-item">
+            <div class="nav-item">
                 <a class="nav-link" href="/about">About</a>
-            </div> -->
+            </div>
             <a href="https://discord.gg/xSvGWYA"><button class="btn login-btn btn-outline-accent my-2 my-sm-0"
-                style="font-size: 10px !important;font-family: poppins;">Join Server</button></a>
+                    style="font-size: 10px !important;font-family: poppins !important;">Join Server</button></a>
         </div>
     </nav>
-    
-    <div class="heading">
-        <h1 class="display-5 title">Documentation is not yet Complete</h1>
-        <p class="subtitle" style="width: 1000px;">Try again later or contact <code>@kidsonfilms</code> for help. <br><br><br></p>
-        <!-- <a class="btn btn-primary btn-lg" href="https://discord.gg/xSvGWYA" target="Discord Invite Link xSvGWYA"
-            role="button">Join Server</a>
-        <a class="btn btn-secondary btn-lg" href="#features" role="button">See our features</a> -->
-        <br /><br /><br /><br /><br /><br /><br> <br> <br><br><br><br><br><br><br>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <div class="row">
+
+        <div class="col-md-3">
+            <nav class="docs-sidebar" data-spy="affix" data-offset-top="300" data-offset-bottom="200" role="navigation">
+                <h2 style="color: white; font-size: 24px; font-weight: bold; margin-left: 20px;">Table of Contents</h2>
+                <ul class="nav">
+                    <li id="commands" class=""><a href="./docs.html?section=commands">Commands</a></li>
+                    <li id="channels" class=""><a href="./docs.html?section=channels">Channels and More</a></li>
+                    <li id="bots-used" class=""><a href="./docs.html?section=bots-used">Bots Used</a></li>
+                    <!-- <ul class="nav">
+                        <li><a href="#line7_1">General Options</a></li>
+                        <li><a href="#line7_2">Style Options</a></li>
+                        <li><a href="#line7_3">Header Options</a></li>
+                        <li><a href="#line7_4">Font Options</a></li>
+                        <li><a href="#line7_5">Slider Options</a></li>
+                        <li><a href="#line7_6">Page Options</a></li>
+                        <li><a href="#line7_7">Import & Export</a></li>
+                    </ul>
+                    <li><a href="#line2">How to Install WordPress</a></li>
+                    <li><a href="#line3">How to Install Theme</a></li>
+                    <li><a href="#line4">Necessary Plugins</a></li>
+                    <li><a href="#line5">Creating Blog Pages</a></li>
+                    <li><a href="#line6">Revolution Slider</a></li>
+                    <li><a href="#line7">How to Use Option Panel</a>
+                    </li>
+                    <li><a href="#line8">Support Desk</a></li>
+                    <li><a href="#line9">Files & Sources</a></li>
+                    <li><a href="#line10">Version History (Changelog)</a></li>
+                    <li><a href="#line11">Copyright and license</a></li> -->
+                </ul>
+            </nav>
+        </div>
+        <div class="doc">
+            <zero-md src="" id="md"> <template>
+                    <!-- Wrap your own CSS styles inside a `<style>` tag -->
+                    <style>
+                        /* My own markdown styles */
+                        h1 {
+                            font-size: 34px;
+                            color: white;
+                        }
+
+                        p {
+                            color: white;
+                            font-size: 14;
+                        }
+
+                        /* My own highlight styles */
+                        code {
+                            background-color: #1b1d23;
+                            color: #af6161;
+                        }
+
+                        h2 {
+                            color: white;
+
+                        }
+
+                        h1 {
+                            border-color: #555;
+                        }
+
+                        h2 {
+                            border-color: #555;
+                        }
+
+                        hr {
+                            background-color: #555;
+                        }
+
+                        blockquote {
+                            border-color: #181a1f;
+                        }
+
+                        img {
+                            background-color: transparent;
+                        }
+
+                        code,
+                        tt {
+                            background-color: #1b1d23;
+                            color: #e83e8c;
+                        }
+
+                        .highlight pre,
+                        pre {
+                            background-color: #1b1d23;
+                            padding: 10px;
+                            border-radius: 10px;
+                        }
+
+                        pre code {
+                            color: rgb(157, 165, 180);
+                        }
+
+                        table tr {
+                            background-color: #222222;
+                            border-color: #181a1f;
+                        }
+
+                        table :nth-child(2n) {
+                            background-color: #090705;
+                            border-color: #181a1f;
+                        }
+
+                        table td th {
+                            border-color: #181a1f;
+                        }
+
+                        h3 {
+                            color: white;
+                        }
+
+                        a {
+                            color: rgb(202, 202, 202);
+                            text-decoration: none;
+                        }
+
+                        a:hover {
+                            color: white;
+                        }
+
+                        li {
+                            color: white;
+                        }
+
+                    </style>
+                </template></zero-md>
+        </div>
+        
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"></script>
+
+<script src="./js/docs.js"></script>
+<script src="./js/app.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -89,5 +223,5 @@
         crossorigin="anonymous"></script>
     <script src="js/now-ui-kit.min.js"></script>
     <script src="./js/app.js"></script>
-</body>
+
 </html>
