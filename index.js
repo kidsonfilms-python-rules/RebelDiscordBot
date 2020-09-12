@@ -235,7 +235,7 @@ client.on('message', async message => {
                                     .setColor('#FF0000')
                                     .setTitle('ERROR 376')
                                     .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
-                                    .setDescription('An Error Has Occurred. Please Try Agian')
+                                    .setDescription('An Error Has Occurred. Please Try Again')
                                     .setThumbnail('https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
                                     .setTimestamp()
                                     .setFooter('Error', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
@@ -354,6 +354,17 @@ client.on('message', async message => {
             );
         message.channel.send(`Banned ${member.user.tag}!`); //If there is no error, and the user was banned, we let them know they were banned successfuly.
         member.send(new DiscordEmbed().setTitle(`You are banned from ${message.guild.name}`).setDescription(`We are sorry to inform you, that **you are banned from ${message.guild.name} untill furter notice.** If you think if was malicious/unfair or a mistake, please contact ` + '`kidsonfilms#4635`, `xapd421#2089`, or `potato master#2162.\n This is the given reason:\n```\n' + reason + '\n```\n Thank you for being a rebel (as long as it lasted)'))
+    } else if (command == prefix + 'request') {
+        var request = ''
+        commandList.forEach((s) => {
+            if (!s == '-request') {
+                request += `${s} `
+            }
+        })
+        const requestsChannel = client.channels.cache.find(channel => channel.name === "requests-temp")
+        requestsChannel.send(`${message.author.toString()} has just requested` + '\n```\n' + message.content.toLowerCase() + '\n```')
+        message.delete()
+        message.reply(`Your request has been sent! ${message.author.toString()} requested\n` + '```\n' + message.content.toLowerCase() + '\n```' + `\nReact with :arrow_up: to upvote a request, or with a :arrow_down: to downvote it.`)
     }
 
 
