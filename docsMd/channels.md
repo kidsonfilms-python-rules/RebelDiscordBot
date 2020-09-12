@@ -32,9 +32,9 @@ If you are confused by this, uninstall [Discord](https://discord.com)
 ### `#dank-memes`
 This is a place for dank memes. You can either upload them or use `-meme` to have `@rebelbot` give one instead.
 ### `#cute-animals`
-This is a place for cute animals. You can either upload them or use `-animals` , `!aww` , or [any other commands here](docs.html?section=commands)
+This is a place for cute animals. You can either upload them or use `-animals` , `!aww` , or [any other commands here](docs?section=commands)
 ### `#rythm-music` and `#music-room`
-This is a place to use `@Rythm`'s [commands](docs.html?section=commands)
+This is a place to use `@Rythm`'s [commands](docs?section=commands)
 
 ## VIP Lounge (hidden to non-`@VIPs`)
 Channels here:
