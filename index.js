@@ -24,6 +24,9 @@ let Tesseract = require('tesseract.js')
 
 var getMetadata = require('get-metadata')
 
+const randomPuppy = require('random-puppy');
+
+
 // const redis = require("redis");
 // const redisClient = redis.createClient();
 
@@ -180,7 +183,8 @@ client.on('message', async message => {
                     { name: '‎', value: '‎' },
                     { name: '**-help**', value: 'Shows a list of all the commands.' },
                     { name: '**-animals**', value: 'Gives a random cute animal picture! :smiley:' },
-                    { name: '**-meme**', value: 'Returns a meme from Reddit' },
+                    { name: '**-meme <optionalSubreddit>**', value: 'Returns a meme from Reddit' },
+                    { name: '**-memebomb**', value: 'Returns a 10 memes from Reddit' },
                     { name: '**-openticket**', value: 'Opens a ticket' },
                     { name: '**-closeticket**', value: 'Closes a ticket' },
 
@@ -204,50 +208,168 @@ client.on('message', async message => {
         animals.shibe().then(s => console.log(s))
         message.delete();
     } else if (command === prefix + 'meme') {
-        // https.get("https://meme-api.herokuapp.com/gimme", (s) => {
-        //     console.log(s)
-        // })
-        const request = require('request');
+        let reddit = [
+            "meme",
+            "animemes",
+            "MemesOfAnime",
+            "animememes",
+            "AnimeFunny",
+            "dankmemes",
+            "dankmeme",
+            "wholesomememes",
+            "MemeEconomy",
+            "techsupportanimals",
+            "meirl",
+            "me_irl",
+            "2meirl4meirl",
+            "AdviceAnimals",
+            "ProgrammerHumor"
+        ]
 
-        request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-            if (err) { return console.log(err); }
-            textract.fromUrl(body.url, function (error, text) {
-                console.log(body.url + '   ' + text)
-            })
+        // var subreddit = 'meme';
+        // if (commandList[1] === 'undefined') {
 
-            if (body.nsfw == true) {
-                console.log(body.url + "has been sent to " + message.author);
-                message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + " (" + body.postLink + ")", { files: [body.url] })
-            } else {
-                request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-                    if (err) { return console.log(err); }
-                    if (body.nsfw == false) {
-                        console.log(body.url + "has been sent to " + message.author);
-                        message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
-                    } else {
-                        request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-                            if (err) { return console.log(err); }
-                            if (body.nsfw == false) {
-                                console.log(body.url + "has been sent to " + message.author);
-                                message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
-                            } else {
-                                const errorEmbed = new Discord.RichEmbed()
-                                    .setColor('#FF0000')
-                                    .setTitle('ERROR 376')
-                                    .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
-                                    .setDescription('An Error Has Occurred. Please Try Again')
-                                    .setThumbnail('https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
-                                    .setTimestamp()
-                                    .setFooter('Error', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
+        // } else {
+        //     subreddit = commandList[1]
+        // }
 
-                                message.channel.send(errorEmbed);
-                            }
-                        });
-                    }
-                });
-            }
-        });
+        if (commandList.length == 2) {
+            var subreddit = commandList[1]
+            message.channel.startTyping();
+
+            randomPuppy(subreddit).then(async url => {
+                await message.channel.send("Here you go " + message.author.toString() + ", You have requested r/" + subreddit, {
+                    files: [{
+                        attachment: url,
+                        name: 'meme.png'
+                    }]
+                }).then(() => message.channel.stopTyping());
+            }).catch(err => console.error(err));
+        } else {
+            var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
+            message.channel.startTyping();
+
+            randomPuppy(subreddit).then(async url => {
+                await message.channel.send("Here you go " + message.author.toString() + " directly from r/" + subreddit, {
+                    files: [{
+                        attachment: url,
+                        name: 'meme.png'
+                    }]
+                }).then(() => message.channel.stopTyping());
+            }).catch(err => console.error(err));
+        }
         message.delete()
+
+
+
+
+        //else if (command === prefix + 'meme') {
+        //     // https.get("https://meme-api.herokuapp.com/gimme", (s) => {
+        //     //     console.log(s)
+        //     // })
+        //     const request = require('request');
+
+        //     request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+        //         if (err) { return console.log(err); }
+        //         textract.fromUrl(body.url, function (error, text) {
+        //             console.log(body.url + '   ' + text)
+        //         })
+
+        //         if (body.nsfw == true) {
+        //             console.log(body.url + "has been sent to " + message.author);
+        //             message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + " (" + body.postLink + ")", { files: [body.url] })
+        //         } else {
+        //             request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+        //                 if (err) { return console.log(err); }
+        //                 if (body.nsfw == false) {
+        //                     console.log(body.url + "has been sent to " + message.author);
+        //                     message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
+        //                 } else {
+        //                     request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
+        //                         if (err) { return console.log(err); }
+        //                         if (body.nsfw == false) {
+        //                             console.log(body.url + "has been sent to " + message.author);
+        //                             message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
+        //                         } else {
+        //                             const errorEmbed = new Discord.RichEmbed()
+        //                                 .setColor('#FF0000')
+        //                                 .setTitle('ERROR 376')
+        //                                 .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
+        //                                 .setDescription('An Error Has Occurred. Please Try Again')
+        //                                 .setThumbnail('https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
+        //                                 .setTimestamp()
+        //                                 .setFooter('Error', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
+
+        //                             message.channel.send(errorEmbed);
+        //                         }
+        //                     });
+        //                 }
+        //             });
+        //         }
+        //     });
+        //     message.delete()
+    } else if (command === prefix + 'memebomb') {
+        let reddit = [
+            "meme",
+            "animemes",
+            "MemesOfAnime",
+            "animememes",
+            "AnimeFunny",
+            "dankmemes",
+            "dankmeme",
+            "wholesomememes",
+            "MemeEconomy",
+            "techsupportanimals",
+            "meirl",
+            "me_irl",
+            "2meirl4meirl",
+            "AdviceAnimals",
+            "ProgrammerHumor"
+        ]
+
+        // var subreddit = 'meme';
+        // if (commandList[1] === 'undefined') {
+
+        // } else {
+        //     subreddit = commandList[1]
+        // }
+         var meme = () => {if (commandList.length == 2) {
+            var subreddit = commandList[1]
+            message.channel.startTyping();
+
+            randomPuppy(subreddit).then(async url => {
+                await message.channel.send("Here you go " + message.author.toString() + ", You have requested r/" + subreddit, {
+                    files: [{
+                        attachment: url,
+                        name: 'meme.png'
+                    }]
+                }).then(() => message.channel.stopTyping());
+            }).catch(err => console.error(err));
+        } else {
+            var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
+            message.channel.startTyping();
+
+            randomPuppy(subreddit).then(async url => {
+                await message.channel.send("Here you go " + message.author.toString() + " directly from r/" + subreddit, {
+                    files: [{
+                        attachment: url,
+                        name: 'meme.png'
+                    }]
+                }).then(() => message.channel.stopTyping());
+            }).catch(err => console.error(err));
+        }}
+
+        meme()
+        meme()
+        meme()
+        meme()
+        meme()
+        meme()
+        meme()
+        meme()
+        meme()
+        meme()
+
     } else if (command === prefix + 'openticket') {
         var name = "ticket-" + message.author.username.toString().toLowerCase() + "-" + Math.floor(Math.random() * (999999 - 100000 + 1) + 100000).toString()
         message.guild.roles.create({
@@ -422,48 +544,37 @@ client.on('guildMemberAdd', m => {
 var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
     // https.get("https://meme-api.herokuapp.com/gimme", (s) => {
     //     console.log(s)
-    // })
-    const request = require('request');
+    // })  "Here's today's daily meme directly from r/" + body.subreddit.toString() + " (" + body.postLink + ") Enjoy!"
     const memeChannel = client.channels.cache.find(channel => channel.name === "dank-memes")
+    let reddit = [
+        "meme",
+        "animemes",
+        "MemesOfAnime",
+        "animememes",
+        "AnimeFunny",
+        "dankmemes",
+        "dankmeme",
+        "wholesomememes",
+        "MemeEconomy",
+        "techsupportanimals",
+        "meirl",
+        "me_irl",
+        "2meirl4meirl",
+        "AdviceAnimals",
+        "ProgrammerHumor"
+    ]
 
-    request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-        if (err) { return console.log(err); }
-        textract.fromUrl(body.url, function (error, text) {
-            console.log(body.url + '   ' + text)
-        })
+    var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
+            message.channel.startTyping();
 
-        if (body.nsfw == true) {
-            console.log(body.url + " Is today's daily meme");
-            memeChannel.send("Here's today's daily meme directly from r/" + body.subreddit.toString() + " (" + body.postLink + ") Enjoy!", { files: [body.url] })
-        } else {
-            request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-                if (err) { return console.log(err); }
-                if (body.nsfw == false) {
-                    console.log(body.url + " Is today's daily meme");
-                    memeChannel.send("Here's today's daily meme directly from r/" + body.subreddit.toString() + " (" + body.postLink + ") Enjoy!", { files: [body.url] })
-                } else {
-                    request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-                        if (err) { return console.log(err); }
-                        if (body.nsfw == false) {
-                            console.log(body.url + " Is today's daily meme");
-                            memeChannel.send("Here's today's daily meme directly from r/" + body.subreddit.toString() + " (" + body.postLink + ") Enjoy!", { files: [body.url] })
-                        } else {
-                            const errorEmbed = new Discord.MessageEmbed()
-                                .setColor('#FF0000')
-                                .setTitle('ERROR 376  TEST')
-                                .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
-                                .setDescription('An Error Has Occurred. Please Try Agian')
-                                .setThumbnail('https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
-                                .setTimestamp()
-                                .setFooter('Error TEST', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
-
-                            memeChannel.send(errorEmbed);
-                        }
-                    });
-                }
-            });
-        }
-    });
+            randomPuppy(subreddit).then(async url => {
+                await memeChannel.send("Here's today's daily meme directly from r/" + subreddit + " Enjoy!", {
+                    files: [{
+                        attachment: url,
+                        name: 'meme.png'
+                    }]
+                }).then(() => message.channel.stopTyping());
+            }).catch(err => console.error(err));
 });
 
 
