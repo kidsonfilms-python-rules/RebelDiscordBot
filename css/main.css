@@ -89,7 +89,7 @@ body {
 }
 
 .heading {
-    padding: 160px 50px !important;
+    padding: 160px 50px;
     color: #fff !important;
     background-image: url("../assets/wavy-purple-by-nouridio.svg") !important;
     background-position: bottom !important;
@@ -158,7 +158,7 @@ body {
 
 .statistics {
     text-align: center !important;
-    padding-top: 300px !important;
+    padding-top: 50px !important;
 }
 
 .statistics .card-body {
@@ -246,3 +246,42 @@ body {
     text-align: center !important;
     color: #a2a8bd !important
 }
+
+@media only screen and (max-width: 640px) {
+    .heading h1{
+        line-height: 1.15 !important;
+        text-align: center;
+        margin-bottom: 10px !important;
+    }
+    .subtitle {
+        text-align: center;
+    }
+    .heading {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 50px;
+    }
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-self: center; 
+    }
+    .features .title {
+        line-height: 1.15 !important;
+        margin-bottom: 10px !important;
+    }
+    .card-title, .card-text{
+        text-align: center !important;
+    }
+    .statistics {
+        padding-top: 100px !important;
+    }
+    .title {
+        line-height: 1.15 !important;
+        text-align: center;
+        margin-bottom: 10px !important;
+    }
+    .dropdown .dropdown-menu {
+        display: unset !important;
+    }
+  }

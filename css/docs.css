@@ -18,8 +18,7 @@
 }
 
 @media (min-width: 992px) {
-    .affix,
-    .affix-bottom {
+    .affix, .affix-bottom {
         width: 213px
     }
     .affix {
@@ -29,16 +28,14 @@
     .affix-bottom {
         position: absolute
     }
-    .affix .bs-docs-sidenav,
-    .affix-bottom .bs-docs-sidenav {
+    .affix .bs-docs-sidenav, .affix-bottom .bs-docs-sidenav {
         margin-top: 0;
         margin-bottom: 0
     }
 }
 
 @media (min-width: 1200px) {
-    .affix,
-    .affix-bottom {
+    .affix, .affix-bottom {
         width: 263px
     }
 }
@@ -53,6 +50,7 @@
 }
 
 /* all links */
+
 .docs-sidebar .nav>li>a {
     color: rgb(255, 255, 255);
     border-left: 2px solid transparent;
@@ -62,12 +60,14 @@
 }
 
 /* nested links */
+
 .docs-sidebar .nav .nav>li>a {
     padding-left: 40px;
     font-size: 14px;
 }
 
-/* hover links */ 
+/* hover links */
+
 .docs-sidebar .nav>li:not(.active)>a:hover {
     color: #0E97EE;
     text-decoration: none;
@@ -75,12 +75,16 @@
     border-left-width: 4px;
     border-left-color: #0E97EE;
 }
+
 /* focus links */
+
 .docs-sidebar .nav>li>a:focus {
     text-decoration: none;
     background-color: transparent;
 }
+
 /* active links */
+
 .docs-sidebar .nav>.active>a {
     color: #0E97EE;
     text-decoration: none;
@@ -91,14 +95,14 @@
 .nav li {
     list-style: none;
 }
+
 .nav a {
     text-decoration: none;
 }
 
 /* all active links */
-.docs-sidebar .nav>.active>a, 
-.docs-sidebar .nav>.active:hover>a,
-.docs-sidebar .nav>.active:focus>a {
+
+.docs-sidebar .nav>.active>a, .docs-sidebar .nav>.active:hover>a, .docs-sidebar .nav>.active:focus>a {
     font-weight: 700;
 }
 
@@ -107,7 +111,6 @@
     width: 15vw;
     height: 100%;
     border-top-right-radius: 10px;
-
 }
 
 .docs-sidebar li {
@@ -134,9 +137,8 @@
 }
 
 /* nested active links */
-.docs-sidebar .nav .nav>.active>a, 
-.docs-sidebar .nav .nav>.active:hover>a,
-.docs-sidebar .nav .nav>.active:focus>a {
+
+.docs-sidebar .nav .nav>.active>a, .docs-sidebar .nav .nav>.active:hover>a, .docs-sidebar .nav .nav>.active:focus>a {
     font-weight: 500;
 }
 
@@ -149,6 +151,7 @@
         display: block
     }
 }
+
 /*Syntax Highlighter : Sublime Theme */
 
 .syntaxhighlighter {
@@ -157,16 +160,7 @@
     margin: 2em 0 1em 0 !important;
 }
 
-.syntaxhighlighter a,
-.syntaxhighlighter div,
-.syntaxhighlighter code,
-.syntaxhighlighter table,
-.syntaxhighlighter table td,
-.syntaxhighlighter table tr,
-.syntaxhighlighter table tbody,
-.syntaxhighlighter table thead,
-.syntaxhighlighter table caption,
-.syntaxhighlighter textarea {
+.syntaxhighlighter a, .syntaxhighlighter div, .syntaxhighlighter code, .syntaxhighlighter table, .syntaxhighlighter table td, .syntaxhighlighter table tr, .syntaxhighlighter table tbody, .syntaxhighlighter table thead, .syntaxhighlighter table caption, .syntaxhighlighter textarea {
     line-height: 1.3em !important;
 }
 
@@ -178,18 +172,15 @@
     background-color: #2b303b !important;
 }
 
-.syntaxhighlighter .string,
-.syntaxhighlighter .string a {
+.syntaxhighlighter .string, .syntaxhighlighter .string a {
     color: #90be8c !important;
 }
 
-.syntaxhighlighter .color1,
-.syntaxhighlighter .color1 a {
+.syntaxhighlighter .color1, .syntaxhighlighter .color1 a {
     color: #d08770 !important;
 }
 
-.syntaxhighlighter .plain,
-.syntaxhighlighter .plain a {
+.syntaxhighlighter .plain, .syntaxhighlighter .plain a {
     color: #c0c5ce !important;
 }
 
@@ -201,8 +192,7 @@
     color: #757a84 !important;
 }
 
-.syntaxhighlighter .line.highlighted.alt1,
-.syntaxhighlighter .line.highlighted.alt2 {
+.syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
     background-color: #333E49 !important;
 }
 
@@ -214,7 +204,9 @@
 .syntaxhighlighter .value {
     color: #96b5b4 !important;
 }
+
 /*css*/
+
 /* .syntaxhighlighter .css.plain,
 .syntaxhighlighter .css.plain a {
     color: #d08770 !important;
@@ -223,17 +215,44 @@
     color: #c0c5ce !important;
 }*/
 
-.syntaxhighlighter .color3,
-.syntaxhighlighter .color3 a {
+.syntaxhighlighter .color3, .syntaxhighlighter .color3 a {
     color: #b48ead !important;
 }
+
 /*js*/
 
 .syntaxhighlighter .js.keyword {
     color: #b48ead !important;
 }
+
 .row {
     display: flex;
     flex-direction: row;
 }
 
+.contents-h2 {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .contents-h2 {
+        display: none;
+    }
+    .docs-sidebar {
+        width: 100vw;
+    }
+    .nav li {
+        text-align: center;
+    }
+    .active {
+        color: white !important;
+        text-decoration: none;
+        /* background-color: #0E97EE; */
+    }
+    .nav {
+        padding-top: 10px !important;
+    }
+}
