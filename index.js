@@ -54,8 +54,19 @@ client.once('ready', () => {
 
 
 client.on('message', async message => {
-
     if (message.author.bot || message.webhookID) return;
+
+    //DAD JOKE
+    const args = message.content.slice(message.length).split(/ +/)
+    // console.log(args)
+
+    if (message.content.toLowerCase().includes('i\'m') || message.content.toLowerCase().includes('im')) {
+        args.forEach((s, index) => {
+            if ((args[index].toLowerCase() == 'i\'m' || args[index].toLowerCase() == 'im') && (args[index + 1])) {
+                message.channel.send(`Hi ${args.slice(index + 1).join(' ')}, I'm dad`);
+            }
+        })
+    }
 
     //MODERATION
     var Filter = require('bad-words'),
@@ -152,8 +163,7 @@ client.on('message', async message => {
     if (!message.content.includes(prefix)) return;
 
     //getting the args from the message
-    const args = message.content.slice(message.length).split(/ +/)
-    console.log(args)
+
 
     //makes the args all lowercase (make it not case sensitive)
     const commandList = args.map(v => v.toLowerCase());
@@ -333,31 +343,33 @@ client.on('message', async message => {
         // } else {
         //     subreddit = commandList[1]
         // }
-         var meme = () => {if (commandList.length == 2) {
-            var subreddit = commandList[1]
-            message.channel.startTyping();
+        var meme = () => {
+            if (commandList.length == 2) {
+                var subreddit = commandList[1]
+                message.channel.startTyping();
 
-            randomPuppy(subreddit).then(async url => {
-                await message.channel.send("Here you go " + message.author.toString() + ", You have requested r/" + subreddit, {
-                    files: [{
-                        attachment: url,
-                        name: 'meme.png'
-                    }]
-                }).then(() => message.channel.stopTyping());
-            }).catch(err => console.error(err));
-        } else {
-            var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
-            message.channel.startTyping();
+                randomPuppy(subreddit).then(async url => {
+                    await message.channel.send("Here you go " + message.author.toString() + ", You have requested r/" + subreddit, {
+                        files: [{
+                            attachment: url,
+                            name: 'meme.png'
+                        }]
+                    }).then(() => message.channel.stopTyping());
+                }).catch(err => console.error(err));
+            } else {
+                var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
+                message.channel.startTyping();
 
-            randomPuppy(subreddit).then(async url => {
-                await message.channel.send("Here you go " + message.author.toString() + " directly from r/" + subreddit, {
-                    files: [{
-                        attachment: url,
-                        name: 'meme.png'
-                    }]
-                }).then(() => message.channel.stopTyping());
-            }).catch(err => console.error(err));
-        }}
+                randomPuppy(subreddit).then(async url => {
+                    await message.channel.send("Here you go " + message.author.toString() + " directly from r/" + subreddit, {
+                        files: [{
+                            attachment: url,
+                            name: 'meme.png'
+                        }]
+                    }).then(() => message.channel.stopTyping());
+                }).catch(err => console.error(err));
+            }
+        }
 
         meme()
         meme()
@@ -565,16 +577,16 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
     ]
 
     var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
-            message.channel.startTyping();
+    message.channel.startTyping();
 
-            randomPuppy(subreddit).then(async url => {
-                await memeChannel.send("Here's today's daily meme directly from r/" + subreddit + " Enjoy!", {
-                    files: [{
-                        attachment: url,
-                        name: 'meme.png'
-                    }]
-                }).then(() => message.channel.stopTyping());
-            }).catch(err => console.error(err));
+    randomPuppy(subreddit).then(async url => {
+        await memeChannel.send("Here's today's daily meme directly from r/" + subreddit + " Enjoy!", {
+            files: [{
+                attachment: url,
+                name: 'meme.png'
+            }]
+        }).then(() => message.channel.stopTyping());
+    }).catch(err => console.error(err));
 });
 
 
