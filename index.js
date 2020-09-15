@@ -68,6 +68,14 @@ client.on('message', async message => {
         })
     }
 
+    //BAFFOON
+    if (message.content.toLowerCase().includes('baffoon')) {
+        message.reply({files : [{
+            attachment : "./baffoon.png",
+            name : message.author.username + 'IsAnIdiot.png'
+        }]})
+    }
+
     //MODERATION
     var Filter = require('bad-words'),
         filter = new Filter({ placeHolder: '򯾁' });
