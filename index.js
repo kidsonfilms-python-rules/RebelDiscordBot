@@ -156,7 +156,7 @@ client.on('message', async message => {
     }
 
     if (message.channel.name.toString() == "honk") {
-        if (!message.content.toString().toLowerCase().includes('honk')) {
+        if (message.content.toString().toLowerCase() != 'honk' || message.content.toString().toLowerCase() != 'honkblast') {
             message.delete()
         }
     }
