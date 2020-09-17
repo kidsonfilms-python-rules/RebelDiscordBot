@@ -9,5 +9,6 @@
     "cSpell.ignoreWords": [
         "botlabs",
         "rebelbot"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
