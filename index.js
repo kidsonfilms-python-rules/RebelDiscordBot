@@ -156,7 +156,11 @@ client.on('message', async message => {
     }
 
     if (message.channel.name.toString() == "honk") {
-        if (message.content.toString().toLowerCase() != 'honk' || message.content.toString().toLowerCase() != 'honkblast') {
+        if (message.content.toString().toLowerCase() == 'honk') {
+            return true
+        } else if (message.content.toString().toLowerCase() == 'honkblast') {
+return true
+        } else {
             message.delete()
         }
     }
