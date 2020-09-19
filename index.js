@@ -70,13 +70,15 @@ client.on('message', async message => {
 
     //BAFFOON
     if (message.content.toLowerCase().includes('baffoon')) {
-        message.reply({files : [{
-            attachment : "./baffoon.png",
-            name : message.author.username + 'IsAnIdiot.png'
-        }]})
+        message.reply({
+            files: [{
+                attachment: "./baffoon.png",
+                name: message.author.username + 'IsAnIdiot.png'
+            }]
+        })
     }
 
-    
+
 
     //MODERATION
     var Filter = require('bad-words'),
@@ -148,7 +150,7 @@ client.on('message', async message => {
                 new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
                 new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
                 new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                
+
             });
             // } else if (myWebhooks.size > 1) {
             //     message.channel.send("**There are more than one `honkers` webhooks. Delete the extras.**")
@@ -161,7 +163,7 @@ client.on('message', async message => {
         if (message.content.toString().toLowerCase() == 'honk') {
             return true
         } else if (message.content.toString().toLowerCase() == 'honkblast') {
-return true
+            return true
         } else {
             message.delete()
         }
@@ -402,54 +404,45 @@ return true
 
     } else if (command === prefix + 'openticket') {
         var name = "ticket-" + message.author.username.toString().toLowerCase() + "-" + Math.floor(Math.random() * (999999 - 100000 + 1) + 100000).toString()
-        message.guild.roles.create({
-            data: {
-                name: name,
-                color: 'DEFAULT',
-            },
-            reason: 'Role to open ' + name + " ticket",
-        }).then(() => {
-            const role = message.guild.roles.cache.find(role => role.name === name);
-            message.member.roles.add(role);
-            var ticketChannel = message.guild.channels.create(name, 'text').then((c) => {
-                ticketChannel = client.channels.cache.find(channel => channel.name === name)
-                // ticketChannel.overwritePermissions(message.guild.roles.cache.find('name', '@everyone'), {
-                //     'VIEW_CHANNEL': false
-                // })
-                // ticketChannel.overwritePermissions(message.guild.cache.roles.find('name', 'Moderator'), {
-                //     'VIEW_CHANNEL': true
-                // })
-                // ticketChannel.overwritePermissions(message.author.id, { 'VIEW_CHANNEL': true, 'SEND_MESSAGES': true, 'MENTION_EVERYONE': false })
-                let everyone = message.guild.roles.cache.find(r => r.name === "@everyone");
-                var modRoleId = message.guild.roles.cache.find(role => role.name === "Moderator");
-                ticketChannel.overwritePermissions([
-                    {
-                       id: message.author.id,
-                       allow: ['VIEW_CHANNEL', "SEND_MESSAGES"],
-                    },
-                    {
-                        id: everyone.id,
-                        deny: ['VIEW_CHANNEL'],
-                     },
-                     {
-                        id: modRoleId,
-                        allow: ['VIEW_CHANNEL', "SEND_MESSAGES"],
-                     },
-                  ], 'Ticket Permissions');
-                var adminRoleId = message.guild.roles.cache.find(role => role.name === "Admin");
-                var modRoleId = message.guild.roles.cache.find(role => role.name === "Moderator");
-                var vipRoleId = message.guild.roles.cache.find(role => role.name === "VIPs");
-                ticketChannel.send(`${adminRoleId} ${modRoleId}, ` + message.author.toString() + " has opened a ticket. " + message.author.toString() + `, If you have opened this ticket to get ${vipRoleId} state your real first name and if you know anyone, please state who you know.`)
-                message.reply(`**Ticket Created! Your ticket is <#${ticketChannel.id.toString()}>.` + ' Use `-closeticket` in <#' + ticketChannel.id.toString() + '> to close it!**')
-                message.delete()
-            })
+
+        const role = message.guild.roles.cache.find(role => role.name === name);
+        message.member.roles.add(role);
+        var ticketChannel = message.guild.channels.create(name, 'text').then((c) => {
+            ticketChannel = client.channels.cache.find(channel => channel.name === name)
+            // ticketChannel.overwritePermissions(message.guild.roles.cache.find('name', '@everyone'), {
+            //     'VIEW_CHANNEL': false
+            // })
+            // ticketChannel.overwritePermissions(message.guild.cache.roles.find('name', 'Moderator'), {
+            //     'VIEW_CHANNEL': true
+            // })
+            // ticketChannel.overwritePermissions(message.author.id, { 'VIEW_CHANNEL': true, 'SEND_MESSAGES': true, 'MENTION_EVERYONE': false })
+            let everyone = message.guild.roles.cache.find(r => r.name === "@everyone");
+            var modRoleId = message.guild.roles.cache.find(role => role.name === "Moderator");
+            ticketChannel.overwritePermissions([
+                {
+                    id: message.author.id,
+                    allow: ['VIEW_CHANNEL', "SEND_MESSAGES"],
+                },
+                {
+                    id: everyone.id,
+                    deny: ['VIEW_CHANNEL'],
+                },
+                {
+                    id: modRoleId,
+                    allow: ['VIEW_CHANNEL', "SEND_MESSAGES"],
+                },
+            ], 'Ticket Permissions');
+            var adminRoleId = message.guild.roles.cache.find(role => role.name === "Admin");
+            var modRoleId = message.guild.roles.cache.find(role => role.name === "Moderator");
+            var vipRoleId = message.guild.roles.cache.find(role => role.name === "VIPs");
+            ticketChannel.send(`${adminRoleId} ${modRoleId}, ` + message.author.toString() + " has opened a ticket. " + message.author.toString() + `, If you have opened this ticket to get ${vipRoleId} state your real first name and if you know anyone, please state who you know.`)
+            message.reply(`**Ticket Created! Your ticket is <#${ticketChannel.id.toString()}>.` + ' Use `-closeticket` in <#' + ticketChannel.id.toString() + '> to close it!**')
+            message.delete()
         })
     } else if (command == prefix + 'closeticket') {
         if (message.channel.name.includes('ticket')) {
             message.channel.setName('closed-ticket-' + message.channel.name)
             message.channel.delete('Closing ticket ' + message.channel.name)
-            const role = message.guild.roles.cache.find(role => role.name === message.channel.name);
-            role.delete()
             console.log('SAME CHANNEL')
         } else if (message.member.roles.find(r => r.name === "Admin") || message.member.roles.find(r => r.name === "Moderator")) {
             if (commandList.length >= 2) {
@@ -463,8 +456,6 @@ return true
                     message.delete()
                 }
                 ticketChannel.delete()
-                const role = message.guild.roles.cache.find(role => role.name === ticketChannel.name);
-                role.delete()
                 // console.log(commandList[1])
             }
         } else {
@@ -533,7 +524,7 @@ return true
         requestsChannel.send(`${message.author.toString()} has just requested` + '\n```\n' + message.content.toLowerCase() + '\n```')
         message.delete()
         message.reply(`Your request has been sent! ${message.author.toString()} requested\n` + '```\n' + message.content.toLowerCase() + '\n```' + `\nReact with :arrow_up: to upvote a request, or with a :arrow_down: to downvote it.`)
-    } 
+    }
 
 
 
