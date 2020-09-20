@@ -45,6 +45,21 @@ const randomPuppy = require('random-puppy');
 //the var client is basically the bot
 const client = new Discord.Client()
 
+const isInvite = async (guild, code) => {
+    return await new Promise((resolve) => {
+      guild.fetchInvites().then((invites) => {
+        for (const invite of invites) {
+          if (code === invite[0]) {
+            resolve(true)
+            return
+          }
+        }
+
+        resolve(false)
+      })
+    })
+  }
+
 
 // tells the bot what to look for to figure out, thats a command is coming
 const prefix = '-'
@@ -68,6 +83,25 @@ client.on('message', async message => {
         })
     }
 
+    //ANTI ADVERTISEMENT
+    if (message.content.toLowerCase().includes('discord.gg/')) {
+        const code = message.content.split('discord.gg/')[1]
+        console.log('CODE:', code)
+    
+        if (message.content.includes('discord.gg/')) {
+          const isOurInvite = await isInvite(message.guild, code)
+          if (!isOurInvite) {
+            if (!message.member.roles.find(r => r.name === "Admin") || !message.member.roles.cache.find(r => r.name === "Mod") || !message.member.roles.cache.find(r => r.name === "Advertiser")) {
+                message.delete()
+                const mutedEmbed = new Discord.MessageEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for **ADVERTISING WITHOUT PERMISSION.** If you think this is a mistake, contact an @Admin")
+                message.author.send(mutedEmbed)
+                message.channel.send(message.author.toString() + "** has broken Rebel Retreat's Rules by Advertising Without Permission**")
+            }
+          }
+        }
+    }
+
+
     //BAFFOON
     if (message.content.toLowerCase().includes('baffoon')) {
         message.reply({
@@ -83,6 +117,13 @@ client.on('message', async message => {
     //MODERATION
     var Filter = require('bad-words'),
         filter = new Filter({ placeHolder: '򯾁' });
+        // console.log(filter.clean(message.content));
+    if (filter.clean(message.content).includes('򯾁')) {
+        message.delete()
+        const mutedEmbed = new Discord.MessageEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for saying ```" + message.content + "``` If you think this is a mistake, contact an @Admin")
+        message.author.send(mutedEmbed)
+        message.channel.send(message.author.toString() + "** has broken Rebel Retreat's Rules by Saying Blacklisted Words**")
+    }
 
     //EASTER EGG
     if (message.content.toString().toLowerCase().includes('suck')) {
@@ -169,13 +210,7 @@ client.on('message', async message => {
         }
     }
 
-    // console.log(filter.clean(message.content));
-    if (filter.clean(message.content).includes('򯾁')) {
-        message.delete()
-        const mutedEmbed = new Discord.MessageEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for saying ```" + message.content + "``` If you think this is a mistake, contact an @Admin")
-        message.author.send(mutedEmbed)
-        message.channel.send(message.author.toString() + "** has broken Rebel Retreat's Rules by Saying Blacklisted Words**")
-    }
+    
 
     //checks if it starts with '!' or the bot sent it. if not then returns the function
     if (!message.content.includes(prefix)) return;
