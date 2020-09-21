@@ -25,6 +25,7 @@ let Tesseract = require('tesseract.js')
 var getMetadata = require('get-metadata')
 
 const randomPuppy = require('random-puppy');
+const fs = require('fs');
 
 
 
@@ -47,18 +48,18 @@ const client = new Discord.Client()
 
 const isInvite = async (guild, code) => {
     return await new Promise((resolve) => {
-      guild.fetchInvites().then((invites) => {
-        for (const invite of invites) {
-          if (code === invite[0]) {
-            resolve(true)
-            return
-          }
-        }
+        guild.fetchInvites().then((invites) => {
+            for (const invite of invites) {
+                if (code === invite[0]) {
+                    resolve(true)
+                    return
+                }
+            }
 
-        resolve(false)
-      })
+            resolve(false)
+        })
     })
-  }
+}
 
 
 // tells the bot what to look for to figure out, thats a command is coming
@@ -74,30 +75,31 @@ client.on('message', async message => {
     if (message.author.bot || message.webhookID) return;
     const args = message.content.slice(message.length).split(/ +/)
 
-    //DAD JOKE
-    if (message.content.toLowerCase().includes('i\'m') || message.content.toLowerCase().includes('im')) {
-        args.forEach((s, index) => {
-            if ((args[index].toLowerCase() == 'i\'m' || args[index].toLowerCase() == 'im') && (args[index + 1])) {
-                message.channel.send(`Hi ${args.slice(index + 1).join(' ')}, I'm dad`);
-            }
-        })
-    }
+    //DAD JOKE DISABLED
+
+    // if (message.content.toLowerCase().includes('i\'m') || message.content.toLowerCase().includes('im')) {
+    //     args.forEach((s, index) => {
+    //         if ((args[index].toLowerCase() == 'i\'m' || args[index].toLowerCase() == 'im') && (args[index + 1])) {
+    //             message.channel.send(`Hi ${args.slice(index + 1).join(' ')}, I'm dad`);
+    //         }
+    //     })
+    // }
 
     //ANTI ADVERTISEMENT
     if (message.content.toLowerCase().includes('discord.gg/')) {
         const code = message.content.split('discord.gg/')[1]
         console.log('CODE:', code)
-    
+
         if (message.content.includes('discord.gg/')) {
-          const isOurInvite = await isInvite(message.guild, code)
-          if (!isOurInvite) {
-            if (!message.member.roles.find(r => r.name === "Admin") || !message.member.roles.cache.find(r => r.name === "Mod") || !message.member.roles.cache.find(r => r.name === "Advertiser")) {
-                message.delete()
-                const mutedEmbed = new Discord.MessageEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for **ADVERTISING WITHOUT PERMISSION.** If you think this is a mistake, contact an @Admin")
-                message.author.send(mutedEmbed)
-                message.channel.send(message.author.toString() + "** has broken Rebel Retreat's Rules by Advertising Without Permission**")
+            const isOurInvite = await isInvite(message.guild, code)
+            if (!isOurInvite) {
+                if (!message.member.roles.find(r => r.name === "Admin") || !message.member.roles.cache.find(r => r.name === "Mod") || !message.member.roles.cache.find(r => r.name === "Advertiser")) {
+                    message.delete()
+                    const mutedEmbed = new Discord.MessageEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for **ADVERTISING WITHOUT PERMISSION.** If you think this is a mistake, contact an @Admin")
+                    message.author.send(mutedEmbed)
+                    message.channel.send(message.author.toString() + "** has broken Rebel Retreat's Rules by Advertising Without Permission**")
+                }
             }
-          }
         }
     }
 
@@ -115,15 +117,25 @@ client.on('message', async message => {
 
 
     //MODERATION
-    var Filter = require('bad-words'),
-        filter = new Filter({ placeHolder: '򯾁' });
-        // console.log(filter.clean(message.content));
-    if (filter.clean(message.content).includes('򯾁')) {
+    var Filter = require('bad-words')
+    let rawdata = fs.readFileSync('lang.json');
+let filterJson = JSON.parse(rawdata);
+
+    filter = new Filter({ placeHolder: '򯾁' });
+    filter.removeWords(...filterJson.removeBlackList);
+    filter.addWords(...filterJson.addBlackList)
+    msgFilter = new Filter()
+    msgFilter.removeWords(...filterJson.removeBlackList);
+    msgFilter.addWords(...filterJson.addBlackList)
+    if (filter.clean(message.content).includes('򯾁') && !message.member.roles.cache.find(r => r.name === "Admin")) {
         message.delete()
         const mutedEmbed = new Discord.MessageEmbed().setColor("#FF0000").setTitle("You Have Been Muted").setDescription("You have been muted for saying ```" + message.content + "``` If you think this is a mistake, contact an @Admin")
         message.author.send(mutedEmbed)
         message.channel.send(message.author.toString() + "** has broken Rebel Retreat's Rules by Saying Blacklisted Words**")
+        message.channel.send(new Discord.MessageEmbed().setColor("#FF0000").setAuthor(message.author.username, message.author.displayAvatarURL()).setDescription(msgFilter.clean(message.content)).setTitle(`Clean Version Of Message By ${message.author.username}`))
     }
+
+
 
     //EASTER EGG
     if (message.content.toString().toLowerCase().includes('suck')) {
@@ -210,7 +222,7 @@ client.on('message', async message => {
         }
     }
 
-    
+
 
     //checks if it starts with '!' or the bot sent it. if not then returns the function
     if (!message.content.includes(prefix)) return;
