@@ -24,7 +24,7 @@ let Tesseract = require('tesseract.js')
 
 var getMetadata = require('get-metadata')
 
-const randomPuppy = require('random-puppy');
+const fetchRandomImage = require('better-random-puppy');
 const fs = require('fs');
 
 
@@ -316,10 +316,10 @@ let filterJson = JSON.parse(rawdata);
             var subreddit = commandList[1]
             message.channel.startTyping();
 
-            randomPuppy(subreddit).then(async url => {
-                await message.channel.send("Here you go " + message.author.toString() + ", You have requested r/" + subreddit, {
+            fetchRandomImage(subreddit).then(async i => {
+                await message.channel.send("Here you go " + message.author.toString() + ", You have requested r/" + subreddit + "\n\n" + i.title, {
                     files: [{
-                        attachment: url,
+                        attachment: i.url,
                         name: 'meme.png'
                     }]
                 }).then(() => message.channel.stopTyping());
@@ -328,10 +328,10 @@ let filterJson = JSON.parse(rawdata);
             var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
             message.channel.startTyping();
 
-            randomPuppy(subreddit).then(async url => {
-                await message.channel.send("Here you go " + message.author.toString() + " directly from r/" + subreddit, {
+            fetchRandomImage(subreddit).then(async i => {
+                await message.channel.send("Here you go " + message.author.toString() + " directly from r/" + subreddit + "\n\n**" + i.title + "**", {
                     files: [{
-                        attachment: url,
+                        attachment: i.url,
                         name: 'meme.png'
                     }]
                 }).then(() => message.channel.stopTyping());
@@ -418,10 +418,10 @@ let filterJson = JSON.parse(rawdata);
                 var subreddit = commandList[1]
                 message.channel.startTyping();
 
-                randomPuppy(subreddit).then(async url => {
-                    await message.channel.send("Here you go " + message.author.toString() + ", You have requested r/" + subreddit, {
+                fetchRandomImage(subreddit).then(async i => {
+                    await message.channel.send("Here you go " + message.author.toString() + ", You have requested r/" + subreddit + "\n\n" + i.title, {
                         files: [{
-                            attachment: url,
+                            attachment: i.url,
                             name: 'meme.png'
                         }]
                     }).then(() => message.channel.stopTyping());
@@ -430,10 +430,10 @@ let filterJson = JSON.parse(rawdata);
                 var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
                 message.channel.startTyping();
 
-                randomPuppy(subreddit).then(async url => {
-                    await message.channel.send("Here you go " + message.author.toString() + " directly from r/" + subreddit, {
+                fetchRandomImage(subreddit).then(async i => {
+                    await message.channel.send("Here you go " + message.author.toString() + " directly from r/" + subreddit + "\n\n" + i.title, {
                         files: [{
-                            attachment: url,
+                            attachment: i.url,
                             name: 'meme.png'
                         }]
                     }).then(() => message.channel.stopTyping());
@@ -655,10 +655,10 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
     var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
     message.channel.startTyping();
 
-    randomPuppy(subreddit).then(async url => {
-        await memeChannel.send("Here's today's daily meme directly from r/" + subreddit + " Enjoy!", {
+    fetchRandomImage(subreddit).then(async i => {
+        await memeChannel.send("Here's today's daily meme directly from r/" + subreddit + " Enjoy!\n\n" + i.title, {
             files: [{
-                attachment: url,
+                attachment: i.url,
                 name: 'meme.png'
             }]
         }).then(() => message.channel.stopTyping());
@@ -667,7 +667,8 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
 
 
 //Lead Dev will give token
-client.login(SECRET)
+// client.login(SECRET)
+client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.E3aJzJC_GW4-XDzmuJLCY4lCdDM')
 
 //52472962
 
