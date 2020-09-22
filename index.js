@@ -446,11 +446,6 @@ let filterJson = JSON.parse(rawdata);
         meme()
         meme()
         meme()
-        meme()
-        meme()
-        meme()
-        meme()
-        meme()
         message.channel.stopTyping()
 
     } else if (command === prefix + 'openticket') {
