@@ -28,6 +28,10 @@ const randomPuppy = require('random-puppy');
 const fs = require('fs');
 
 
+//DISCORD SECRET
+const SECRET = process.env.SECRET
+
+
 
 
 
@@ -663,7 +667,7 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
 
 
 //Lead Dev will give token
-client.login('NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.oyPqHUKunPk2eLwlTIOTtWTlZfM')
+client.login(SECRET)
 
 //52472962
 
