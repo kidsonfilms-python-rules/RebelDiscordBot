@@ -33,8 +33,7 @@ const fs = require('fs');
 
 
 //DISCORD SECRET
-// const SECRET = process.env.SECRET
-const SECRET = 'NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.uWtOreTNLYDnWJAzW3bkueDq4sA'
+const SECRET = process.env.SECRET
 
 
 
