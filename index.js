@@ -12,24 +12,29 @@ const animals = require('relevant-animals')
 
 var schedule = require('node-schedule');
 
-const scorerank = require('scorerank')
+const SongPlayer = require('./SongPlayer.js')
+// const scorerank = require('scorerank')
 
-var textract = require('textract');
+// var textract = require('textract');
 
-const url = 'redis://127.0.0.1:6379'
-const options = { prefix: 'scores' }
+// const url = 'redis://127.0.0.1:6379'
+// const options = { prefix: 'scores' }
 
-let https = require('https')
+// let https = require('https')
 let Tesseract = require('tesseract.js')
 
-var getMetadata = require('get-metadata')
+// var getMetadata = require('get-metadata')
 
 const fetchRandomImage = require('better-random-puppy');
+
 const fs = require('fs');
 
 
+
+
 //DISCORD SECRET
-const SECRET = process.env.SECRET
+// const SECRET = process.env.SECRET
+const SECRET = 'NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.uWtOreTNLYDnWJAzW3bkueDq4sA'
 
 
 
@@ -66,12 +71,25 @@ const isInvite = async (guild, code) => {
 }
 
 
+
+
+
+
+
+
 // tells the bot what to look for to figure out, thats a command is coming
 const prefix = '-'
+
+var songPlayer = new SongPlayer()
 
 client.once('ready', () => {
     console.log('Im online yay!')
     client.user.setActivity("-help | rebel bot");
+    
+    // HW Channel Stream
+    var hwChan = client.channels.cache.find(channel => channel.name === "homework-stream")
+    songPlayer.start(hwChan)
+    
 })
 
 
