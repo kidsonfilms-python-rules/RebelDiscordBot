@@ -12,13 +12,7 @@ read COMMIT_MSG
 git commit -m "$COMMIT_MSG"
 echo ""
 echo "Finished Commit..."
-echo ""
-git push heroku master
-echo ""
-echo "Finished Push to Heroku master branch"
-echo ""
-git push origin master
-echo ""
-echo "Finished Push to Github/origin master branch"
-echo ""
+echo "Pushing to Github and Heroku..."
+git push heroku master &
+git push origin master &
 read -p "Complete. PRESS ENTER TO EXIT"
