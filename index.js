@@ -13,8 +13,7 @@ const fetchRandomImage = require('better-random-puppy');
 const fs = require('fs');
 
 //DISCORD SECRET
-// const SECRET = process.env.SECRET
-const SECRET = 'NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.yxGAQSE9-uVhWRB2bod7dGv-PyE'
+const SECRET = process.env.SECRET
 
 //the var client is basically the bot
 const client = new Discord.Client()
