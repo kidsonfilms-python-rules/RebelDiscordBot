@@ -18,7 +18,7 @@ git clone https://github.com/kidsonfilms-python-rules/RebelDiscordBot.git
 ```
 or download the ZIP version [here](https://github.com/kidsonfilms-python-rules/RebelDiscordBot/archive/master.zip).
 
-<!-- After it finished downloading, go into the root folder and run  -->
+After it finished downloading, go into the root folder and run 
 ```sh
 npm i
 ```

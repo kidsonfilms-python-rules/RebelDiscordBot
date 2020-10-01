@@ -441,7 +441,7 @@ let filterJson = JSON.parse(rawdata);
 })
 
 client.on('guildMemberAdd', m => {
-    console.log(m.username + " Just Joined!")
+    console.log(m.user.username + " Just Joined!")
     m.send("Welcome to the Rebel Retreat new recruit! You are currently a foreigner and must read the rules (in the `#server-rules` channel) for this channel to have access to read and send messages to this server. Go to the `#self-roles` channel to assign yourself roles that suit your tastes. Further roles will be assigned by admins or moderators. Help and support will be given in its respective channel, `#help-and-support`. Have fun!")
 })
 
