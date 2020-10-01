@@ -1,11 +1,3 @@
-// app = require('app')
-
-// let port = process.env.PORT;
-// if (port == null || port == "") {
-//   port = 8000;
-// }
-// app.listen(port);
-
 const Discord = require('discord.js')
 
 const animals = require('relevant-animals')
@@ -13,47 +5,22 @@ const animals = require('relevant-animals')
 var schedule = require('node-schedule');
 
 const SongPlayer = require('./SongPlayer.js')
-// const scorerank = require('scorerank')
 
-// var textract = require('textract');
-
-// const url = 'redis://127.0.0.1:6379'
-// const options = { prefix: 'scores' }
-
-// let https = require('https')
 let Tesseract = require('tesseract.js')
-
-// var getMetadata = require('get-metadata')
 
 const fetchRandomImage = require('better-random-puppy');
 
 const fs = require('fs');
 
-
-
-
 //DISCORD SECRET
-const SECRET = process.env.SECRET
-
-
-
-
-
-// const redis = require("redis");
-// const redisClient = redis.createClient();
-
-// redisClient.on("error", function (error) {
-//     console.error(error);
-// });
-
-// redisClient.set("key", "value", redis.print);
-// redisClient.get("key", redis.print);
-
-// const score = scorerank(url, options)
+// const SECRET = process.env.SECRET
+const SECRET = 'NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.yxGAQSE9-uVhWRB2bod7dGv-PyE'
 
 //the var client is basically the bot
 const client = new Discord.Client()
 
+
+//A function that checks if a link is a invite from us
 const isInvite = async (guild, code) => {
     return await new Promise((resolve) => {
         guild.fetchInvites().then((invites) => {
@@ -69,13 +36,6 @@ const isInvite = async (guild, code) => {
     })
 }
 
-
-
-
-
-
-
-
 // tells the bot what to look for to figure out, thats a command is coming
 const prefix = '-'
 
@@ -87,7 +47,7 @@ client.once('ready', () => {
     
     // HW Channel Stream
     var hwChan = client.channels.cache.find(channel => channel.name === "homework-stream")
-    songPlayer.start(hwChan)
+    songPlayer.start(hwChan, client)
     
 })
 
@@ -169,50 +129,16 @@ let filterJson = JSON.parse(rawdata);
     if (message.content.toString().toLowerCase() == 'honk') {
         const honkChannel = client.channels.cache.find(channel => channel.name === "honk")
         var webhooks = message.guild.fetchWebhooks().then(w => {
-            // var myWebhooks = webhooks.filter(webhook => webhook.name === 'honkers');
-            // if (webhooks.size == 0) {
-            //     honkChannel.createWebhook('honkers', {
-            //         avatar: 'https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024',
-            //     }).then(webhook => {
-            //         console.log(`Created webhook ${webhook}`)
-            //         var webhooks = message.guild.fetchWebhooks().then(webhooks => {
-            //             // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
-            //             new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk')
-            //         });
-            //     }
-            //     ).catch(console.error);
-            // } else if (myWebhooks.size == 1) {
             var webhooks = message.guild.fetchWebhooks().then(w => {
-                // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
-                // myWebhooks.first().send('honk')
                 new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
             });
-            // } else if (myWebhooks.size > 1) {
-            //     message.channel.send("**There are more than one `honkers` webhooks. Delete the extras.**")
-            // }
         });
 
     }
     if (message.content.toString().toLowerCase() == 'honkblast') {
         const honkChannel = client.channels.cache.find(channel => channel.name === "honk")
         var webhooks = message.guild.fetchWebhooks().then(w => {
-            // var myWebhooks = webhooks.filter(webhook => webhook.name === 'honkers');
-            // if (webhooks.size == 0) {
-            //     honkChannel.createWebhook('honkers', {
-            //         avatar: 'https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024',
-            //     }).then(webhook => {
-            //         console.log(`Created webhook ${webhook}`)
-            //         var webhooks = message.guild.fetchWebhooks().then(webhooks => {
-            //             // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
-            //             new Discord.WebhookClient("753069618062426263", "FvPfNoDFXf036cfnAa37R3OqL-Z1iBsFL7Kr3mmZFQjpYv9lQOGHXv0HWqDX6EeXoDn0").send('honk')
-            //         });
-            //     }
-            //     ).catch(console.error);
-            // } else if (myWebhooks.size == 1) {
             var webhooks = message.guild.fetchWebhooks().then(w => {
-                // var myWebhooks = webhooks.filter(webhook => webhook.owner.id === client.user.id && webhook.name === 'honkers');
-                // myWebhooks.first().send('honk')
-
                 new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
                 new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
                 new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
@@ -226,9 +152,6 @@ let filterJson = JSON.parse(rawdata);
                 new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
 
             });
-            // } else if (myWebhooks.size > 1) {
-            //     message.channel.send("**There are more than one `honkers` webhooks. Delete the extras.**")
-            // }
         });
 
     }
@@ -257,7 +180,7 @@ let filterJson = JSON.parse(rawdata);
     const command = commandList[0]
 
     if (command === prefix + 'help') {
-        if (commandList[1] == 'admin') {      //message.sender.roles.find(r => r.name === "Admin") || message.member.roles.find(r => rname === "Mod"
+        if (commandList[1] == 'admin' && message.member.roles.cache.find(r => r.name === "Admin") || message.member.roles.cache.find(r => rname === "Mod")) {
             var adminhelpembed = new Discord.MessageEmbed()
                 .setColor('#E96A00')
                 .setTitle('Commands List')
@@ -288,7 +211,6 @@ let filterJson = JSON.parse(rawdata);
                 .setFooter('rebel bot • Help Menu')
             message.channel.send(helpembed)
         }
-        // message.channel.send(helpembed)
         message.delete()
 
     } else if (command === prefix + 'ping') {
@@ -322,13 +244,6 @@ let filterJson = JSON.parse(rawdata);
             "ProgrammerHumor"
         ]
 
-        // var subreddit = 'meme';
-        // if (commandList[1] === 'undefined') {
-
-        // } else {
-        //     subreddit = commandList[1]
-        // }
-
         if (commandList.length == 2) {
             var subreddit = commandList[1]
             message.channel.startTyping();
@@ -357,54 +272,6 @@ let filterJson = JSON.parse(rawdata);
         message.delete()
         message.channel.stopTyping()
 
-
-
-
-        //else if (command === prefix + 'meme') {
-        //     // https.get("https://meme-api.herokuapp.com/gimme", (s) => {
-        //     //     console.log(s)
-        //     // })
-        //     const request = require('request');
-
-        //     request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-        //         if (err) { return console.log(err); }
-        //         textract.fromUrl(body.url, function (error, text) {
-        //             console.log(body.url + '   ' + text)
-        //         })
-
-        //         if (body.nsfw == true) {
-        //             console.log(body.url + "has been sent to " + message.author);
-        //             message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + " (" + body.postLink + ")", { files: [body.url] })
-        //         } else {
-        //             request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-        //                 if (err) { return console.log(err); }
-        //                 if (body.nsfw == false) {
-        //                     console.log(body.url + "has been sent to " + message.author);
-        //                     message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
-        //                 } else {
-        //                     request('https://meme-api.herokuapp.com/gimme', { json: true }, (err, res, body) => {
-        //                         if (err) { return console.log(err); }
-        //                         if (body.nsfw == false) {
-        //                             console.log(body.url + "has been sent to " + message.author);
-        //                             message.channel.send("Here you go " + message.author.toString() + " directly from r/" + body.subreddit.toString() + "(" + body.postLink + ")", { files: [body.url] })
-        //                         } else {
-        //                             const errorEmbed = new Discord.RichEmbed()
-        //                                 .setColor('#FF0000')
-        //                                 .setTitle('ERROR 376')
-        //                                 .setAuthor('ERROR', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
-        //                                 .setDescription('An Error Has Occurred. Please Try Again')
-        //                                 .setThumbnail('https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png')
-        //                                 .setTimestamp()
-        //                                 .setFooter('Error', 'https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png');
-
-        //                             message.channel.send(errorEmbed);
-        //                         }
-        //                     });
-        //                 }
-        //             });
-        //         }
-        //     });
-        //     message.delete()
     } else if (command === prefix + 'memebomb') {
         let reddit = [
             "meme",
@@ -423,13 +290,6 @@ let filterJson = JSON.parse(rawdata);
             "AdviceAnimals",
             "ProgrammerHumor"
         ]
-
-        // var subreddit = 'meme';
-        // if (commandList[1] === 'undefined') {
-
-        // } else {
-        //     subreddit = commandList[1]
-        // }
         var meme = () => {
             if (commandList.length == 2) {
                 var subreddit = commandList[1]
@@ -472,13 +332,6 @@ let filterJson = JSON.parse(rawdata);
         message.member.roles.add(role);
         var ticketChannel = message.guild.channels.create(name, 'text').then((c) => {
             ticketChannel = client.channels.cache.find(channel => channel.name === name)
-            // ticketChannel.overwritePermissions(message.guild.roles.cache.find('name', '@everyone'), {
-            //     'VIEW_CHANNEL': false
-            // })
-            // ticketChannel.overwritePermissions(message.guild.cache.roles.find('name', 'Moderator'), {
-            //     'VIEW_CHANNEL': true
-            // })
-            // ticketChannel.overwritePermissions(message.author.id, { 'VIEW_CHANNEL': true, 'SEND_MESSAGES': true, 'MENTION_EVERYONE': false })
             let everyone = message.guild.roles.cache.find(r => r.name === "@everyone");
             var modRoleId = message.guild.roles.cache.find(role => role.name === "Moderator");
             ticketChannel.overwritePermissions([
@@ -513,13 +366,11 @@ let filterJson = JSON.parse(rawdata);
                     message.channel.send(`**Ticket Has failed to close. ERORR: ${err.toString()}. **`)
                     message.delete()
                 }
-                // ticketChannel.send('THIS FINALLY WORKS!! :fireworks: :smiley: :fireworks:')
                 try { ticketChannel.setName('closed-ticket-' + ticketChannel.name) } catch (err) {
                     message.channel.send(`**Ticket Has failed to close. ERORR: ${err.toString()}. **`)
                     message.delete()
                 }
                 ticketChannel.delete()
-                // console.log(commandList[1])
             }
         } else {
             message.reply('Ticket has failed to close. Please make sure you have proper permissions or have no typos. Here is your failed command: ```sh\n' + message.content.toString() + '\n```')
@@ -588,51 +439,6 @@ let filterJson = JSON.parse(rawdata);
         message.delete()
         message.reply(`Your request has been sent! ${message.author.toString()} requested\n` + '```\n' + message.content.toLowerCase() + '\n```' + `\nReact with :arrow_up: to upvote a request, or with a :arrow_down: to downvote it.`)
     }
-
-
-
-
-
-
-
-    //else if (command === prefix + 'cube-record') {
-    //     var dict = {
-    //         1: "1st",
-    //         2: "2nd",
-    //         3: "3rd",
-    //         4: "4th",
-    //         5: "5th",
-    //         6: "6th",
-    //         7: "7th",
-    //         8: "8th",
-    //         9: "9th",
-    //         10: "10th"
-    //     };
-    //     // message.channel.send('I cant set rubix cube records yet :weary:')
-    //     console.log(command)
-    //     if (commandList[1] === "set") {
-    //         console.log("contains set")
-    //         const sender = message.author.username
-    //         const time = commandList[2]
-    //         console.log(sender)
-    //         score.add(sender, time*-1)
-    //     } else if (commandList[1] === "display") {
-    //         const tops = await score.top([0, 10])
-    //         console.log(tops)
-    //         var rankMessage = ''
-    //         var indexRank = 1
-    //         tops.forEach(rank => {
-    //             rankNum = dict[indexRank]
-    //             time = rank[1].toString().replace('-', '')
-    //             rankMessage += rankNum + ".  " + rank[0] + ' with the time of ' + time + '\n'
-    //             indexRank = indexRank + 1
-    //         })
-    //         console.log(rankMessage)
-    //         message.channel.send(rankMessage)
-    //     }
-
-    //}
-
 })
 
 client.on('guildMemberAdd', m => {
@@ -642,9 +448,6 @@ client.on('guildMemberAdd', m => {
 
 //MEME SCHEDULE
 var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
-    // https.get("https://meme-api.herokuapp.com/gimme", (s) => {
-    //     console.log(s)
-    // })  "Here's today's daily meme directly from r/" + body.subreddit.toString() + " (" + body.postLink + ") Enjoy!"
     const memeChannel = client.channels.cache.find(channel => channel.name === "dank-memes")
     let reddit = [
         "meme",
@@ -681,5 +484,4 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
 //Lead Dev will give token
 client.login(SECRET)
 
-//52472962
 

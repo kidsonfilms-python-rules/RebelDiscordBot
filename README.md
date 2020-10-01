@@ -56,4 +56,4 @@ Please [open an issue](https://github.com/kidsonfilms-python-rules/PMSDiscordBot
 Please contribute by contacting our Lead Developer `@kidsonfilms` on Discord, who will give you further instructions.
 
 ## License
-We are using the wtfpl (Do What The F*ck You Want To Public License) license.
+We are using the (MIT)[LICENSE.md] license.
