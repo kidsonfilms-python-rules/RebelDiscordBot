@@ -15,4 +15,3 @@ echo "Finished Commit..."
 echo "Pushing to Github and Heroku..."
 git push heroku master &
 git push origin master &
-read -p "Complete. PRESS ENTER TO EXIT"
