@@ -29,6 +29,7 @@ class SongPlayer {
         }).catch(e => {
             // Oh no, it errored! Let's log it to console :)
             console.error(e);
+            client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e)
         });
 
     }

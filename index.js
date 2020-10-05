@@ -254,7 +254,7 @@ let filterJson = JSON.parse(rawdata);
                         name: 'meme.png'
                     }]
                 }).then(() => message.channel.stopTyping());
-            }).catch(err => console.error(err));
+            }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err)});
         } else {
             var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
             message.channel.startTyping();
@@ -266,7 +266,7 @@ let filterJson = JSON.parse(rawdata);
                         name: 'meme.png'
                     }]
                 }).then(() => message.channel.stopTyping());
-            }).catch(err => console.error(err));
+            }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err)});
         }
         message.delete()
         message.channel.stopTyping()
@@ -301,7 +301,7 @@ let filterJson = JSON.parse(rawdata);
                             name: 'meme.png'
                         }]
                     }).then(() => message.channel.stopTyping());
-                }).catch(err => console.error(err));
+                }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err);});
             } else {
                 var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
                 message.channel.startTyping();
@@ -313,7 +313,7 @@ let filterJson = JSON.parse(rawdata);
                             name: 'meme.png'
                         }]
                     }).then(() => message.channel.stopTyping());
-                }).catch(err => console.error(err));
+                }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e)});
             }
         }
 
@@ -367,6 +367,7 @@ let filterJson = JSON.parse(rawdata);
                 }
                 try { ticketChannel.setName('closed-ticket-' + ticketChannel.name) } catch (err) {
                     message.channel.send(`**Ticket Has failed to close. ERORR: ${err.toString()}. **`)
+                    client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err)
                     message.delete()
                 }
                 ticketChannel.delete()
@@ -401,8 +402,10 @@ let filterJson = JSON.parse(rawdata);
 
         await member
             .roles.add(muterole)
-            .catch(error =>
+            .catch(error => {
                 message.channel.send(`Unable to mute user because of: ${error}.`)
+                client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + error)
+            }
             )
         message.channel.send(`Successfully muted ${member.user.tag}!`);
         member.send(new DiscordEmbed().setTitle(`You are muted in ${message.guild.name}`).setDescription(`We are sorry to inform you, that **you are muted in ${message.guild.name} untill furter notice.** If you think if was malicious/unfair or a mistake, please contact ` + '`kidsonfilms#4635`, `xapd421#2089`, or `potato master#2162.\n This is the given reason:\n```\n' + reason + '\n```\n'))
@@ -422,7 +425,10 @@ let filterJson = JSON.parse(rawdata);
         await member
             .ban(reason) //Here we ban the user.
             .catch(error => //We check if there is an error. If there is an error, it will display it in the chat.
+                {
                 message.channel.send(`Unable to ban user because of: ${error}.`)
+                client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + error)
+                }
             );
         message.channel.send(`Banned ${member.user.tag}!`); //If there is no error, and the user was banned, we let them know they were banned successfuly.
         member.send(new DiscordEmbed().setTitle(`You are banned from ${message.guild.name}`).setDescription(`We are sorry to inform you, that **you are banned from ${message.guild.name} untill furter notice.** If you think if was malicious/unfair or a mistake, please contact ` + '`kidsonfilms#4635`, `xapd421#2089`, or `potato master#2162.\n This is the given reason:\n```\n' + reason + '\n```\n Thank you for being a rebel (as long as it lasted)'))
@@ -476,7 +482,7 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
                 name: 'meme.png'
             }]
         }).then(() => message.channel.stopTyping());
-    }).catch(err => console.error(err));
+    }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e)});
 });
 
 
