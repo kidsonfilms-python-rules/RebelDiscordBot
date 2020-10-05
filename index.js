@@ -13,7 +13,8 @@ const fetchRandomImage = require('better-random-puppy');
 const fs = require('fs');
 
 //DISCORD SECRET
-const SECRET = process.env.SECRET
+// const SECRET = process.env.SECRET
+const SECRET = 'NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.qKIbGEiBSEHaqGquU5GD4f_i2co'
 
 //the var client is basically the bot
 const client = new Discord.Client()
@@ -179,7 +180,7 @@ let filterJson = JSON.parse(rawdata);
     const command = commandList[0]
 
     if (command === prefix + 'help') {
-        if (commandList[1] == 'admin' && message.member.roles.cache.find(r => r.name === "Admin") || message.member.roles.cache.find(r => rname === "Mod")) {
+        if (commandList[1] == 'admin' && message.member.roles.cache.find(r => r.name === "Admin") || message.member.roles.cache.find(r => r.name === "Mod")) {
             var adminhelpembed = new Discord.MessageEmbed()
                 .setColor('#E96A00')
                 .setTitle('Commands List')
