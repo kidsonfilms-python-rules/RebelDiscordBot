@@ -1,6 +1,6 @@
 # Discord Bot for Rebel Retreat
 
-This is a discord bot for Rebel Retreat. [Join Here](https://discord.gg/xSvGWYA)
+This is a Discord bot for Rebel Retreat. [Join Here](https://discord.gg/xSvGWYA)
 ## Table of Contents
 
 - [Installation](#installation)
@@ -24,19 +24,20 @@ npm i
 ```
 
 ## Usage
-To test your local bot, go to [Discord Developer Applications Portal](discord.com/developers/applications) and add a new application and fill it out. Go to Bot and add a username and icon (optional). Then copy (`ctrl + c`) your Client ID in `General Information`. __KEEP THIS ID SECRET FROM PEOPLE YOU DON'T KNOW.__
+To test your local bot, go to [Discord Developer Applications Portal](discord.com/developers/applications) and add a new application and fill it out. Go to Bot and create a bot using `Build-A-Bot`. Then copy (`ctrl + c` or `⌘ + c`) your Discord Bot Token in `Bot`. __KEEP THIS TOKEN SECRET FROM PEOPLE YOU DON'T KNOW.__
 
 Then, go to the [Discord Permissions Calculator](https://discordapi.com/permissions.html) and select all the Permissions you want your bot to get and paste your client ID into the corresponding box. After that, click the link it provides you and select your server and click `Continue > Authorize`.
 
-Replace the varible `SECRET` in `index.js` with the secret you just copied. For example:
-```js
-// From This
-const SECRET = process.env.SECRET
-
-// To This
-const SECRET = 'YOUR_SECRET'
-// And Replace YOUR_SECRET to What You Copied
+To enter your Discord Bot Token, you can do one of the following:
+### File (Recomended For Local Use)
+Create a file called `SECRETS.txt` and then put in the following:
+```sh
+YOUR_SECRET
 ```
+And replace `YOUR_SECRET` with your Discord Bot Token.
+
+### Enviroment Varible (Recommended For Server Use)
+Create and a Enviroment Varible called `SECRET` and place the value being your Discord Bot Token
 
 
 ### Test on local machine
@@ -56,4 +57,4 @@ Please [open an issue](https://github.com/kidsonfilms-python-rules/PMSDiscordBot
 Please contribute by contacting our Lead Developer `@kidsonfilms` on Discord, who will give you further instructions.
 
 ## License
-We are using the (MIT)[LICENSE.md] license.
+We are using the [MIT](LICENSE.md) license.

@@ -12,8 +12,25 @@ const fetchRandomImage = require('better-random-puppy');
 
 const fs = require('fs');
 
+const chalk = require('chalk');
+
 //DISCORD SECRET
-const SECRET = process.env.SECRET
+function getSecret(file) {
+    try {
+        fs.accessSync(file, fs.constants.R_OK | fs.constants.W_OK);
+        console.log(chalk.bold('Entering Development Mode...'))
+        const SECRET = fs.readFileSync(file, 'utf8', function(err, data) {
+            if (err) throw err;
+            return data
+          });
+        return SECRET
+    } catch (err) {
+        const SECRET = process.env.SECRET
+        console.error(err)
+        return SECRET
+    }
+}
+
 
 //the var client is basically the bot
 const client = new Discord.Client()
@@ -502,6 +519,8 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
     scheduledMeme
 });
 
+SECRET = getSecret('SECRETS.txt')
+console.log('Discord Bot Token Given: ', chalk.bold(SECRET))
 
 //Lead Dev will give token
 client.login(SECRET)
