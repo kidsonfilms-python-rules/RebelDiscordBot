@@ -103,7 +103,7 @@ client.on('message', async message => {
     }
 
     if (message.content.toLowerCase().includes('https://discordapp.com/channels/')) {
-        const msgcode = message.content.split('https://discordapp.com/channels/')[1].split('/')[2]
+        const msgcode = message.content.split('https://discordapp.com/channels/')[1].split('/')[2].split(' ')[0]
         const channelCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[1]
         const guildCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[0]
         const channel = await client.guilds.cache.get(guildCode).channels.cache.get(channelCode)
