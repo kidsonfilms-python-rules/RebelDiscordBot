@@ -13,7 +13,8 @@ const fetchRandomImage = require('better-random-puppy');
 const fs = require('fs');
 
 //DISCORD SECRET
-const SECRET = process.env.SECRET
+// const SECRET = process.env.SECRET
+const SECRET = 'NzM3NDI0Mzk3MDc3NDQ2Njg4.Xx9J_A.zdHdEDXcMW368x8r61eqpXOUN5Y'
 
 //the var client is basically the bot
 const client = new Discord.Client()
@@ -35,6 +36,8 @@ const isInvite = async (guild, code) => {
     })
 }
 
+
+
 // tells the bot what to look for to figure out, thats a command is coming
 const prefix = '-'
 
@@ -43,11 +46,11 @@ var songPlayer = new SongPlayer()
 client.once('ready', () => {
     console.log('Im online yay!')
     client.user.setActivity("-help | rebel bot");
-    
+
     // HW Channel Stream
     var hwChan = client.channels.cache.find(channel => channel.name === "homework-stream")
     songPlayer.start(hwChan, client)
-    
+
 })
 
 
@@ -83,6 +86,19 @@ client.on('message', async message => {
         }
     }
 
+    if (message.content.toLowerCase().includes('https://discordapp.com/channels/')) {
+        const msgcode = message.content.split('https://discordapp.com/channels/')[1].split('/')[2]
+        const channelCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[1]
+        const guildCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[0]
+        const channel = await client.guilds.cache.get(guildCode).channels.cache.get(channelCode)
+        channel.messages.fetch({ around: msgcode, limit: 1 })
+            .then(messages => {
+                msg = messages.first()
+                quoteEmbed = new Discord.MessageEmbed().setColor("#FFFFFF").setAuthor(msg.author.username, msg.author.displayAvatarURL()).setDescription(msg.content).setTitle(`Jump To Original Message!`).setURL(`https://discordapp.com/channels/${guildCode}/${channelCode}/${msgcode}`)
+                message.channel.send(quoteEmbed)
+            });
+    }
+
 
     //BAFFOON
     if (message.content.toLowerCase().includes('baffoon')) {
@@ -99,7 +115,7 @@ client.on('message', async message => {
     //MODERATION
     var Filter = require('bad-words')
     let rawdata = fs.readFileSync('lang.json');
-let filterJson = JSON.parse(rawdata);
+    let filterJson = JSON.parse(rawdata);
 
     filter = new Filter({ placeHolder: '򯾁' });
     filter.removeWords(...filterJson.removeBlackList);
@@ -254,7 +270,7 @@ let filterJson = JSON.parse(rawdata);
                         name: 'meme.png'
                     }]
                 }).then(() => message.channel.stopTyping());
-            }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err)});
+            }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err) });
         } else {
             var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
             message.channel.startTyping();
@@ -266,7 +282,7 @@ let filterJson = JSON.parse(rawdata);
                         name: 'meme.png'
                     }]
                 }).then(() => message.channel.stopTyping());
-            }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err)});
+            }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err) });
         }
         message.delete()
         message.channel.stopTyping()
@@ -301,7 +317,7 @@ let filterJson = JSON.parse(rawdata);
                             name: 'meme.png'
                         }]
                     }).then(() => message.channel.stopTyping());
-                }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err);});
+                }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err); });
             } else {
                 var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
                 message.channel.startTyping();
@@ -313,7 +329,7 @@ let filterJson = JSON.parse(rawdata);
                             name: 'meme.png'
                         }]
                     }).then(() => message.channel.stopTyping());
-                }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e)});
+                }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e) });
             }
         }
 
@@ -425,10 +441,10 @@ let filterJson = JSON.parse(rawdata);
         await member
             .ban(reason) //Here we ban the user.
             .catch(error => //We check if there is an error. If there is an error, it will display it in the chat.
-                {
+            {
                 message.channel.send(`Unable to ban user because of: ${error}.`)
                 client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + error)
-                }
+            }
             );
         message.channel.send(`Banned ${member.user.tag}!`); //If there is no error, and the user was banned, we let them know they were banned successfuly.
         member.send(new DiscordEmbed().setTitle(`You are banned from ${message.guild.name}`).setDescription(`We are sorry to inform you, that **you are banned from ${message.guild.name} untill furter notice.** If you think if was malicious/unfair or a mistake, please contact ` + '`kidsonfilms#4635`, `xapd421#2089`, or `potato master#2162.\n This is the given reason:\n```\n' + reason + '\n```\n Thank you for being a rebel (as long as it lasted)'))
@@ -482,7 +498,9 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
                 name: 'meme.png'
             }]
         }).then(() => message.channel.stopTyping());
-    }).catch(err => {console.error(err);client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e)});
+    }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e) });
+
+    scheduledMeme
 });
 
 
