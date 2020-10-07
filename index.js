@@ -73,6 +73,10 @@ client.once('ready', () => {
 client.on('message', async message => {
     if (message.author.bot || message.webhookID) return;
     const args = message.content.slice(message.length).split(/ +/)
+    //makes the args all lowercase (make it not case sensitive)
+    const commandList = args.map(v => v.toLowerCase());
+    console.log(commandList)
+    const command = commandList[0]
 
     //DAD JOKE DISABLED
 
@@ -151,7 +155,15 @@ client.on('message', async message => {
 
     //EASTER EGG
     if (message.content.toString().toLowerCase().includes('suck')) {
+        if (commandList[commandList.indexOf('suck') - 1] == 'i' || commandList[commandList.indexOf('suck') - 1] == 'I' || commandList[commandList.indexOf('sucks') - 1] == 'i' || commandList[commandList.indexOf('sucks') - 1] == 'I') {
+          message.reply('Yes.')
+        } else if (commandList[commandList.indexOf('suck') - 1] == 'ios' || commandList[commandList.indexOf('sucks') - 1] == 'ios') {
+          message.reply('Keep spreading the good word brother.')
+        } else if (commandList[commandList.indexOf('suck') - 1] == 'android' || commandList[commandList.indexOf('sucks') - 1] == 'android' || commandList[commandList.indexOf('suck') - 1] == 'androids' || commandList[commandList.indexOf('sucks') - 1] == 'androids') {
+            message.reply('Who let the idiots in?')
+          } else {
         message.reply('no u')
+        }
     }
 
 
@@ -204,12 +216,6 @@ client.on('message', async message => {
     if (!message.content.includes(prefix)) return;
 
     //getting the args from the message
-
-
-    //makes the args all lowercase (make it not case sensitive)
-    const commandList = args.map(v => v.toLowerCase());
-    console.log(commandList)
-    const command = commandList[0]
 
     if (command === prefix + 'help') {
         if (commandList[1] == 'admin' && message.member.roles.cache.find(r => r.name === "Admin") || message.member.roles.cache.find(r => r.name === "Mod")) {
