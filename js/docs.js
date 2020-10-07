@@ -4,8 +4,18 @@ var url_string = window.location.href; //window.location.href
 var url = new URL(url_string);
 var sect = url.searchParams.get("section");
 
-var mdSection = document.getElementById('md')
-mdSection.src = `./docsMd/${sect}.md`
+if (!sect) {
+    var mdSection = document.getElementById('md')
+    mdSection.src = `./docsMd/index.md`
 
-var li = document.getElementById(sect)
-li.className += "active"
+    var li = document.getElementById('index')
+    li.className += "active"
+} else {
+    var mdSection = document.getElementById('md')
+    mdSection.src = `./docsMd/${sect}.md`
+    var li = document.getElementById(sect)
+    li.className += "active"
+}
+
+
+
