@@ -136,7 +136,7 @@ client.on('message', async message => {
     filter = new Filter({ placeHolder: '򯾁' });
     filter.removeWords(...filterJson.removeBlackList);
     filter.addWords(...filterJson.addBlackList)
-    msgFilter = new Filter()
+    msgFilter = new Filter({placeHolder: '█'})
     msgFilter.removeWords(...filterJson.removeBlackList);
     msgFilter.addWords(...filterJson.addBlackList)
     if (filter.clean(message.content).includes('򯾁') && !message.member.roles.cache.find(r => r.name === "Admin")) {
@@ -187,7 +187,7 @@ client.on('message', async message => {
 
     }
 
-    if (message.channel.name.toString() == "honk") {
+    try{ if (message.channel.name.toString() == "honk") {
         if (message.content.toString().toLowerCase() == 'honk') {
             return true
         } else if (message.content.toString().toLowerCase() == 'honkblast') {
@@ -195,6 +195,7 @@ client.on('message', async message => {
         } else {
             message.delete()
         }
+    }} catch (e) {
     }
 
 
@@ -247,6 +248,18 @@ client.on('message', async message => {
     } else if (command === prefix + 'ping') {
         const m = await message.channel.send("Ping? (wow you see this)");
         m.edit(`Pong! \`${m.createdTimestamp - message.createdTimestamp}ms\``);
+    } else if (command === prefix + 'pong') {
+        const m = await message.channel.send("Pong? (wow you see this)");
+        m.edit(`Ping?! \`${m.createdTimestamp - message.createdTimestamp}ms\``);
+    } else if (command === prefix + 'color') {
+        if (!commandList[1]) message.channel.send('Type the color you want to change your name to.')
+        try {
+            const role = client.guild.roles.cache.find(role => role.name === commandList[1]);
+            if(!role) message.channel.send('That is an invalid color.')
+            message.member.roles.add(role)
+        } catch (err) {
+            console.error(err)
+        }
     } else if (command === prefix + 'animals') {
         var anilist = ["dog", 'cat']
         if (anilist[Math.floor(Math.random() * anilist.length)] == 'dog') {
