@@ -160,7 +160,7 @@ client.on('message', async message => {
         } else if (commandList[commandList.indexOf('suck') - 1] == 'ios' || commandList[commandList.indexOf('sucks') - 1] == 'ios') {
           message.reply('Keep spreading the good word brother.')
         } else if (commandList[commandList.indexOf('suck') - 1] == 'android' || commandList[commandList.indexOf('sucks') - 1] == 'android' || commandList[commandList.indexOf('suck') - 1] == 'androids' || commandList[commandList.indexOf('sucks') - 1] == 'androids') {
-            message.reply('Who let the idiots in?')
+            message.reply('No. Just no.')
           } else {
         message.reply('no u')
         }
