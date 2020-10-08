@@ -155,11 +155,11 @@ client.on('message', async message => {
 
     //EASTER EGG
     if (message.content.toString().toLowerCase().includes('suck')) {
-        if (commandList[commandList.indexOf('suck') - 1] == 'i' || commandList[commandList.indexOf('suck') - 1] == 'I' || commandList[commandList.indexOf('sucks') - 1] == 'i' || commandList[commandList.indexOf('sucks') - 1] == 'I') {
+        if (commandList[commandList.indexOf('suck') - 1].include('i') || commandList[commandList.indexOf('suck') - 1].include('I') || commandList[commandList.indexOf('sucks') - 1].include('i') || commandList[commandList.indexOf('sucks') - 1].include('I')) {
           message.reply('Yes.')
-        } else if (commandList[commandList.indexOf('suck') - 1] == 'ios' || commandList[commandList.indexOf('sucks') - 1] == 'ios') {
+        } else if (commandList[commandList.indexOf('suck') - 1].include('ios') || commandList[commandList.indexOf('sucks') - 1].include('ios')) {
           message.reply('Keep spreading the good word brother.')
-        } else if (commandList[commandList.indexOf('suck') - 1] == 'android' || commandList[commandList.indexOf('sucks') - 1] == 'android' || commandList[commandList.indexOf('suck') - 1] == 'androids' || commandList[commandList.indexOf('sucks') - 1] == 'androids') {
+        } else if (commandList[commandList.indexOf('suck') - 1].include('android') || commandList[commandList.indexOf('sucks') - 1].include('android') || commandList[commandList.indexOf('suck') - 1].include('androids') || commandList[commandList.indexOf('sucks') - 1].include('androids')) {
             message.reply('No. Just no.')
           } else {
         message.reply('no u')

@@ -13,5 +13,5 @@ git commit -m "$COMMIT_MSG"
 echo ""
 echo "Finished Commit..."
 echo "Pushing to Github and Heroku..."
-git push heroku master &
-git push origin master &
+git push heroku master
+git push origin master
