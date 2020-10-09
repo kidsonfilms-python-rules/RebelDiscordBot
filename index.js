@@ -26,7 +26,6 @@ function getSecret(file) {
         return SECRET
     } catch (err) {
         const SECRET = process.env.SECRET
-        console.error(err)
         client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```')
         return SECRET
     }
@@ -107,10 +106,10 @@ client.on('message', async message => {
         }
     }
 
-    if (message.content.toLowerCase().includes('https://discordapp.com/channels/')) {
-        const msgcode = message.content.split('https://discordapp.com/channels/')[1].split('/')[2].split(' ')[0]
-        const channelCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[1]
-        const guildCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[0]
+    if (message.content.toLowerCase().includes('https://discordapp.com/channels/') || message.content.toLowerCase().includes('https://discord.com/channels/')) {
+        const msgcode = message.content.split('https://discordapp.com/channels/')[1].split('/')[2].split(' ')[0] || message.content.split('https://discord.com/channels/')[1].split('/')[2].split(' ')[0]
+        const channelCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[1] || message.content.split('https://discord.com/channels/')[1].split('/')[1]
+        const guildCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[0] || message.content.split('https://discord.com/channels/')[1].split('/')[0]
         const channel = await client.guilds.cache.get(guildCode).channels.cache.get(channelCode)
         channel.messages.fetch({ around: msgcode, limit: 1 })
             .then(messages => {
