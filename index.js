@@ -27,6 +27,7 @@ function getSecret(file) {
     } catch (err) {
         const SECRET = process.env.SECRET
         console.error(err)
+        client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```')
         return SECRET
     }
 }
@@ -265,6 +266,7 @@ client.on('message', async message => {
             message.member.roles.add(role)
         } catch (err) {
             console.error(err)
+            client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```')
         }
     } else if (command === prefix + 'animals') {
         var anilist = ["dog", 'cat']
@@ -305,7 +307,7 @@ client.on('message', async message => {
                         name: 'meme.png'
                     }]
                 }).then(() => message.channel.stopTyping());
-            }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err) });
+            }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```') });
         } else {
             var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
             message.channel.startTyping();
@@ -317,7 +319,7 @@ client.on('message', async message => {
                         name: 'meme.png'
                     }]
                 }).then(() => message.channel.stopTyping());
-            }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err) });
+            }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```') });
         }
         message.delete()
         message.channel.stopTyping()
@@ -352,7 +354,7 @@ client.on('message', async message => {
                             name: 'meme.png'
                         }]
                     }).then(() => message.channel.stopTyping());
-                }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err); });
+                }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```') });
             } else {
                 var subreddit = reddit[Math.floor(Math.random() * reddit.length)];
                 message.channel.startTyping();
@@ -364,7 +366,7 @@ client.on('message', async message => {
                             name: 'meme.png'
                         }]
                     }).then(() => message.channel.stopTyping());
-                }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e) });
+                }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```') });
             }
         }
 
@@ -418,7 +420,7 @@ client.on('message', async message => {
                 }
                 try { ticketChannel.setName('closed-ticket-' + ticketChannel.name) } catch (err) {
                     message.channel.send(`**Ticket Has failed to close. ERORR: ${err.toString()}. **`)
-                    client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + err)
+                    client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```')
                     message.delete()
                 }
                 ticketChannel.delete()
@@ -455,7 +457,7 @@ client.on('message', async message => {
             .roles.add(muterole)
             .catch(error => {
                 message.channel.send(`Unable to mute user because of: ${error}.`)
-                client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + error)
+                client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```')
             }
             )
         message.channel.send(`Successfully muted ${member.user.tag}!`);
@@ -478,7 +480,7 @@ client.on('message', async message => {
             .catch(error => //We check if there is an error. If there is an error, it will display it in the chat.
             {
                 message.channel.send(`Unable to ban user because of: ${error}.`)
-                client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + error)
+                client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```')
             }
             );
         message.channel.send(`Banned ${member.user.tag}!`); //If there is no error, and the user was banned, we let them know they were banned successfuly.
@@ -533,7 +535,7 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
                 name: 'meme.png'
             }]
         }).then(() => message.channel.stopTyping());
-    }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n' + e) });
+    }).catch(err => { console.error(err); client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```') });
 
     scheduledMeme
 });
@@ -542,6 +544,9 @@ SECRET = getSecret('SECRETS.txt')
 console.log('Discord Bot Token Given: ', chalk.bold(SECRET))
 
 //Lead Dev will give token
-client.login(SECRET)
+client.login(SECRET).catch((err) => {
+    console.error(err);
+    client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```')
+})
 
 
