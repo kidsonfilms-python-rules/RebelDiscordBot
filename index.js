@@ -26,6 +26,7 @@ function getSecret(file) {
         return SECRET
     } catch (err) {
         const SECRET = process.env.SECRET
+        console.error(err)
         client.channels.cache.find(channel => channel.name === "bots").send('**ERROR**\n```sh\n' + err + '```')
         return SECRET
     }
