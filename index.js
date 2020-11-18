@@ -107,10 +107,10 @@ client.on('message', async message => {
         }
     }
 
-    if (message.content.toLowerCase().includes('https://discordapp.com/channels/') || message.content.toLowerCase().includes('https://discord.com/channels/')) {
-        const msgcode = message.content.split('https://discordapp.com/channels/')[1].split('/')[2].split(' ')[0] || message.content.split('https://discord.com/channels/')[1].split('/')[2].split(' ')[0]
-        const channelCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[1] || message.content.split('https://discord.com/channels/')[1].split('/')[1]
-        const guildCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[0] || message.content.split('https://discord.com/channels/')[1].split('/')[0]
+    if (message.content.toLowerCase().includes('https://discordapp.com/channels/')) {
+        const msgcode = message.content.split('https://discordapp.com/channels/')[1].split('/')[2].split(' ')[0]
+        const channelCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[1]
+        const guildCode = message.content.split('https://discordapp.com/channels/')[1].split('/')[0]
         const channel = await client.guilds.cache.get(guildCode).channels.cache.get(channelCode)
         channel.messages.fetch({ around: msgcode, limit: 1 })
             .then(messages => {
@@ -174,7 +174,7 @@ client.on('message', async message => {
         const honkChannel = client.channels.cache.find(channel => channel.name === "honk")
         var webhooks = message.guild.fetchWebhooks().then(w => {
             var webhooks = message.guild.fetchWebhooks().then(w => {
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
             });
         });
 
@@ -183,17 +183,17 @@ client.on('message', async message => {
         const honkChannel = client.channels.cache.find(channel => channel.name === "honk")
         var webhooks = message.guild.fetchWebhooks().then(w => {
             var webhooks = message.guild.fetchWebhooks().then(w => {
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
-                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://cdn.discordapp.com/avatars/693035835452424193/6ddbea0f3ac219a633833660f8a3846f.png?size=1024" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
+                new Discord.WebhookClient("755962483050676224", "ScLmExmOHj9vU7RiJJ-m0opB7iZQRkpYayz94Ts4VbC74Sxyn0yfPnBUX8F7kmouaiqk").send('honk', { avatarURL: "https://repository-images.githubusercontent.com/285282107/0bbf1d00-e7c1-11ea-8e75-f0c00557c52f" })
 
             });
         });
@@ -496,6 +496,16 @@ client.on('message', async message => {
         requestsChannel.send(`${message.author.toString()} has just requested` + '\n```\n' + message.content.toLowerCase() + '\n```')
         message.delete()
         message.reply(`Your request has been sent! ${message.author.toString()} requested\n` + '```\n' + message.content.toLowerCase() + '\n```' + `\nReact with :arrow_up: to upvote a request, or with a :arrow_down: to downvote it.`)
+    } else if (command == prefix + 'spam') {
+        function sleep(ms) {
+            return new Promise((resolve) => {
+              setTimeout(resolve, ms);
+            });
+          } 
+        for (let step = 0; step < 40; step++) {
+            message.channel.send(`spam`)
+            await sleep(5000)
+          }
     }
 })
 
@@ -540,8 +550,9 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
     scheduledMeme
 });
 
-SECRET = getSecret('SECRETS.txt')
-console.log('Discord Bot Token Given: ', chalk.bold(SECRET))
+// SECRET = getSecret('SECRETS.txt')
+// console.log('Discord Bot Token Given: ', chalk.bold(SECRET))
+SECRET = process.env.SECRET
 
 //Lead Dev will give token
 client.login(SECRET).catch((err) => {
