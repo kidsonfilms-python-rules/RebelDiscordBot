@@ -546,9 +546,9 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
     scheduledMeme
 });
 
-SECRET = getSecret('SECRETS.txt')
+// SECRET = getSecret('SECRETS.txt')
+SECRET = process.env.SECRET
 console.log('Discord Bot Token Given: ', chalk.bold(SECRET))
-// SECRET = process.env.SECRET
 
 //Lead Dev will give token
 client.login(SECRET).catch((err) => {
