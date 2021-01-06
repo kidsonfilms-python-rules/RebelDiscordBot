@@ -499,9 +499,9 @@ client.on('message', async message => {
         message.delete()
         message.reply(`Your request has been sent! ${message.author.toString()} requested\n` + '```\n' + message.content.toLowerCase() + '\n```' + `\nReact with :arrow_up: to upvote a request, or with a :arrow_down: to downvote it.`)
     } else if (command == prefix + 'github') {
-        channel.send('Here is our GitHub: https://github.com/kidsonfilms-python-rules/RebelDiscordBot')
+        message.channel.send('Here is our GitHub: https://github.com/kidsonfilms-python-rules/RebelDiscordBot')
     } else if (command == prefix + 'blacklist') {
-        channel.send('Here is a list of all blacklisted words **NSFW WARNING**: https://github.com/kidsonfilms-python-rules/RebelDiscordBot/blob/master/lang.json')
+        message.channel.send('Here is a list of all blacklisted words **NSFW WARNING**: https://github.com/kidsonfilms-python-rules/RebelDiscordBot/blob/master/lang.json')
     }
 })
 
