@@ -245,6 +245,8 @@ client.on('message', async message => {
                     { name: '**-memebomb**', value: 'Returns a 10 memes from Reddit' },
                     { name: '**-openticket**', value: 'Opens a ticket' },
                     { name: '**-closeticket**', value: 'Closes a ticket' },
+                    { name: '**-github**', value: 'Gives a link to our Github repo' },
+                    { name: '**-blacklist**', value: 'Gives a link to all blacklisted words' },
 
                 )
                 .setFooter('rebel bot • Help Menu')
@@ -496,16 +498,10 @@ client.on('message', async message => {
         requestsChannel.send(`${message.author.toString()} has just requested` + '\n```\n' + message.content.toLowerCase() + '\n```')
         message.delete()
         message.reply(`Your request has been sent! ${message.author.toString()} requested\n` + '```\n' + message.content.toLowerCase() + '\n```' + `\nReact with :arrow_up: to upvote a request, or with a :arrow_down: to downvote it.`)
-    } else if (command == prefix + 'spam') {
-        function sleep(ms) {
-            return new Promise((resolve) => {
-              setTimeout(resolve, ms);
-            });
-          } 
-        for (let step = 0; step < 40; step++) {
-            message.channel.send(`spam`)
-            await sleep(5000)
-          }
+    } else if (command == prefix + 'github') {
+        channel.send('Here is our GitHub: https://github.com/kidsonfilms-python-rules/RebelDiscordBot')
+    } else if (command == prefix + 'blacklist') {
+        channel.send('Here is a list of all blacklisted words **NSFW WARNING**: https://github.com/kidsonfilms-python-rules/RebelDiscordBot/blob/master/lang.json')
     }
 })
 
@@ -550,9 +546,9 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
     scheduledMeme
 });
 
-// SECRET = getSecret('SECRETS.txt')
-// console.log('Discord Bot Token Given: ', chalk.bold(SECRET))
-SECRET = process.env.SECRET
+SECRET = getSecret('SECRETS.txt')
+console.log('Discord Bot Token Given: ', chalk.bold(SECRET))
+// SECRET = process.env.SECRET
 
 //Lead Dev will give token
 client.login(SECRET).catch((err) => {
