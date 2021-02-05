@@ -502,6 +502,8 @@ client.on('message', async message => {
         message.channel.send('Here is our GitHub: https://github.com/kidsonfilms-python-rules/RebelDiscordBot')
     } else if (command == prefix + 'blacklist') {
         message.channel.send('Here is a list of all blacklisted words **NSFW WARNING**: https://github.com/kidsonfilms-python-rules/RebelDiscordBot/blob/master/lang.json')
+    } else if (command == prefix + 'mcip') {
+        message.channel.send(new Discord.MessageEmbed().setTitle("RebelCraft IP").setAuthor(message.author.username, message.author.displayAvatarURL).setColor('#ff8800').setDescription("**IP: RebelCraft.Minecraft.Best**").setFooter("Rebel Bot", client.user.avatarURL).setTimestamp())
     }
 })
 
@@ -546,8 +548,8 @@ var scheduledMeme = schedule.scheduleJob('00 19 * * *', function () {
     scheduledMeme
 });
 
-// SECRET = getSecret('SECRETS.txt')
-SECRET = process.env.SECRET
+SECRET = getSecret('SECRETS.txt')
+// SECRET = process.env.SECRET
 console.log('Discord Bot Token Given: ', chalk.bold(SECRET))
 
 //Lead Dev will give token
