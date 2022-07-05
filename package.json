@@ -11,7 +11,7 @@
   "author": "Siddharth Ray",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/opus": "^0.3.3",
+    "@discordjs/opus": "^0.8.0",
     "bad-words": "^3.0.3",
     "better-random-puppy": "^1.0.1",
     "chalk": "^4.1.0",
